@@ -72,3 +72,43 @@
   background-color: #DE470F;
   z-index: 1;
 }
+.register_lth{
+  padding: 10px;
+  position: relative;
+  width: inherit;
+  min-height: 60px;
+  /*background: #de470f78;*/
+  /*color: #fff;*/
+}
+.register_icon{
+  font-size: 1.5em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
+}
+.table_lth th, .table_lth td{
+  padding: 0px !important;
+}
+.register_display{
+  opacity: 0;
+  display: none;
+  transition-duration: 500ms;
+  color: #de470f;
+}
+.register_lth:hover .register_display{
+  display: block; 
+  cursor: pointer;
+  transition-duration: 500ms;
+  color: #de470f;
+  opacity: 1;
+
+}
+.filter_lth{
+  margin-top: 77px;
+  padding: 10px;
+  border-radius: 5px;
+  background: #de470f;
+  color: #fff;
+  height: calc(100vh - 100px)
+}

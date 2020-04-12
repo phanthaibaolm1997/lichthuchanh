@@ -23,7 +23,7 @@
 				<p class="text-center"><i>Tuần 01 (20/12/2020 - 28/12/2020)</i></p>
 				<br/>
 				<br/>
-				<table class="table table-bordered text-center">
+				<table class="table table-bordered text-center table_lth">
 					<tbody>
 						<tr>
 							<th>Buổi</th>
@@ -39,12 +39,14 @@
 							<th rowspan="3">Sáng</th>
 							<th>Phòng 01</th>
 							<td>
-								<p class="text-center" style="margin-bottom: 0px"><i class="fa fa-user" aria-hidden="true"></i> <strong>Phan Tấn Tài</strong></p>
-								<i >CT152 - Mạng máy tính</i>
+								<div class="register_lth">
+									<p class="text-center" style="margin-bottom: 0px"><i class="fa fa-user" aria-hidden="true"></i> <strong>Phan Tấn Tài</strong></p>
+									<i >CT152 - Mạng máy tính</i>
+								</div>
 							</td>
 							<th></th>
 							<th></th>
-							<th style="background-color: #95ffad">Khớp</th>
+							<th></th>
 							<th></th>
 							<th></th>
 						</tr>
@@ -52,18 +54,30 @@
 							<th>Phòng 02</th>
 							<th></th>
 							<th></th>
-							<td style="background-color: #fbffad"> <p class="text-center" style="margin-bottom: 0px"><i class="fa fa-user" aria-hidden="true"></i> <strong>Phan Tấn Tài</strong></p>
-								<i >CT152 - Mạng máy tính</i></td>
+							<td>
+								<div class="register_lth">
+									<p class="text-center" style="margin-bottom: 0px"><i class="fa fa-user" aria-hidden="true"></i> <strong>Phan Tấn Tài</strong></p>
+									<i >CT152 - Mạng máy tính</i>
+								</div>
+							</td>
 							<th></th>
-							<td style="background-color: #fbffad"> <p class="text-center" style="margin-bottom: 0px"><i class="fa fa-user" aria-hidden="true"></i> <strong>Phan Tấn Tài</strong></p>
-								<i >CT152 - Mạng máy tính</i></td>
+							<td>
+								<div class="register_lth">
+									<p class="text-center" style="margin-bottom: 0px"><i class="fa fa-user" aria-hidden="true"></i> <strong>Phan Tấn Tài</strong></p>
+									<i >CT152 - Mạng máy tính</i>
+								</div>
+							</td>
 							<th></th>
 						</tr>
 						<tr>
 							<th>Phòng 03</th>
 							<th></th>
-							<td style="background-color: #fbffad"> <p class="text-center" style="margin-bottom: 0px"><i class="fa fa-user" aria-hidden="true"></i> <strong>Phan Tấn Tài</strong></p>
-								<i >CT152 - Mạng máy tính</i></td>
+							<td>
+								<div class="register_lth">
+									<p class="text-center" style="margin-bottom: 0px"><i class="fa fa-user" aria-hidden="true"></i> <strong>Phan Tấn Tài</strong></p>
+									<i >CT152 - Mạng máy tính</i>
+								</div>
+							</td>
 							<th></th>
 							<th></th>
 							<th></th>
@@ -74,10 +88,18 @@
 							<th>Phòng 01</th>
 							<th></th>
 							<th></th>
-							<td style="background-color: #fbffad"> <p class="text-center" style="margin-bottom: 0px"><i class="fa fa-user" aria-hidden="true"></i> <strong>Phan Tấn Tài</strong></p>
-								<i >CT152 - Mạng máy tính</i></td>
-							<td style="background-color: #fbffad"> <p class="text-center" style="margin-bottom: 0px"><i class="fa fa-user" aria-hidden="true"></i> <strong>Phan Tấn Tài</strong></p>
-								<i >CT152 - Mạng máy tính</i></td>
+							<td>
+								<div class="register_lth">
+									<p class="text-center" style="margin-bottom: 0px"><i class="fa fa-user" aria-hidden="true"></i> <strong>Phan Tấn Tài</strong></p>
+									<i >CT152 - Mạng máy tính</i>
+								</div>
+							</td>
+							<td>
+								<div class="register_lth">
+									<p class="text-center" style="margin-bottom: 0px"><i class="fa fa-user" aria-hidden="true"></i> <strong>Phan Tấn Tài</strong></p>
+									<i >CT152 - Mạng máy tính</i>
+								</div>
+							</td>
 							<th></th>
 
 							<th></th>
@@ -88,20 +110,33 @@
 							<th></th>
 							<th></th>
 							<th></th>
-
-							<td style="background-color: #fbffad"> <p class="text-center" style="margin-bottom: 0px"><i class="fa fa-user" aria-hidden="true"></i> <strong>Phan Tấn Tài</strong></p>
-								<i >CT152 - Mạng máy tính</i></td>
+							<td>
+								<div class="register_lth">
+									<p class="text-center" style="margin-bottom: 0px"><i class="fa fa-user" aria-hidden="true"></i> <strong>Phan Tấn Tài</strong></p>
+									<i >CT152 - Mạng máy tính</i>
+								</div>
+							</td>
 							<th></th>
 						</tr>
 						<tr>
 							<th>Phòng 03</th>
+							<th>
+								<div class="register_lth">
+									<div class="register_display">
+										<i class="fa fa-sign-in register_icon" aria-hidden="true" data-toggle="modal" data-target="#myModal"></i>
+									</div>
+								</div>
+							</th>
 							<th></th>
 							<th></th>
 							<th></th>
 							<th></th>
-							<th></th>
-							<td style="background-color: #fbffad"> <p class="text-center" style="margin-bottom: 0px"><i class="fa fa-user" aria-hidden="true"></i> <strong>Phan Tấn Tài</strong></p>
-								<i >CT152 - Mạng máy tính</i></td>
+							<td>
+								<div class="register_lth">
+									<p class="text-center" style="margin-bottom: 0px"><i class="fa fa-user" aria-hidden="true"></i> <strong>Phan Tấn Tài</strong></p>
+									<i >CT152 - Mạng máy tính</i>
+								</div>
+							</td>
 						</tr>
 					</tbody>
 				</table>
@@ -114,29 +149,49 @@
 				
 			</div>
 			<div class="col-md-2">
-				<h4 class="text-center" style="margin-top: 95px">Nâng cao</h4>
-				<br>
-				<label><i class="fa fa-qrcode" aria-hidden="true"></i> Chọn phần mềm</label>
-				<select class="form-control">
-					<option>Điện toán</option>
-				</select>
-				<br/>
-				<label> <i class="fa fa-desktop" aria-hidden="true"></i> Chọn CPU</label>
-				<select class="form-control">
-					<option>Điện toán</option>
-				</select>
-				<br/>
-				<label><i class="fa fa-microchip" aria-hidden="true"></i> Số lượng máy</label>
-				<select class="form-control">
-					<option>Điện toán</option>
-				</select>
-				<br>
-				<button style="width: 100%" class="btn btn-primary"> Tìm</button>
-				<br/>
+				<div class="filter_lth">
+					<h4 class="text-center">Nâng cao</h4>
+					<br>
+					<label><i class="fa fa-qrcode" aria-hidden="true"></i> Chọn phần mềm</label>
+					<select class="form-control">
+						<option>Điện toán</option>
+					</select>
+					<br/>
+					<label> <i class="fa fa-desktop" aria-hidden="true"></i> Chọn CPU</label>
+					<select class="form-control">
+						<option>Điện toán</option>
+					</select>
+					<br/>
+					<label><i class="fa fa-microchip" aria-hidden="true"></i> Số lượng máy</label>
+					<select class="form-control">
+						<option>Điện toán</option>
+					</select>
+					<br>
+					<button style="width: 100%" class="btn btn-default"> Tìm kiếm</button>
+					<br/>
+				</div>
 			</div>
 		</div>
 	</div>
 
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog modal-xl" style="width: 50%">
+      <div class="modal-content" >
+        <div class="modal-header" style="background: #de470f; color: #fff;">
+         	<h4 class="modal-title"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> Đăng ký lịch thực hành</h4>
+          	<button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body" style="height: calc(100vh - 200px)">
+         
+        </div>
+        <div class="modal-footer">
+        	<button type="button" class="btn btn-primary" data-dismiss="modal">Đăng ký</button>
+          	<button type="button" class="btn btn-danger" data-dismiss="modal">Hủy bỏ</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
