@@ -12,4 +12,9 @@ class tuan extends Model
     public function tkb(){
 		return $this->hasMany('App\tkb', 'tuan');
 	}
+
+	//Data
+	public function getAllTuan(){
+		return tuan::all();
+	}
 }

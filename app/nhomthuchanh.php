@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class nhomhocphan extends Model
+class nhomthuchanh extends Model
 {
-    protected $table = "nhomhocphan";
-    public $primaryKey = "stt_nhom";
+    protected $table = "nhomthuchanh";
+    public $primaryKey = "sttnhom";
 
     // Relationship
 	public function hocky(){
@@ -20,7 +20,10 @@ class nhomhocphan extends Model
 		 return $this->belongsTo('App\namhoc', 'namhoc');
 	}
 	public function lophocphan(){
-		 return $this->belongsTo('App\lophocphan', 'sttl');
+		 return $this->belongsTo('App\lophocphan', 'sttl')->with('canbo');
+	}
+	public function tkb(){
+		return $this->hasMany('App\tkb', 'sttnhom');
 	}
 
 }
