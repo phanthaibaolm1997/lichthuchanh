@@ -20,6 +20,7 @@ Route::group(['prefix'=>'can-bo'],function(){
 //Admin Router
 Route::group(['prefix'=>'admin'],function(){
 	Route::get('/', 'AdminController@getIndex')->name('admin');
+	Route::get('/auto', 'SapLichController@autoScheduling');
 	Route::get('/thoi-khoa-bieu', 'AdminController@getTKBAdmin')->name('admin.thoikhoabieu');
 	Route::post('/change-lich', 'AdminController@postChangeLich')->name('admin.changelich');
 	Route::get('/hoc-phan', 'AdminController@getHocPhan')->name('admin.hocphan');

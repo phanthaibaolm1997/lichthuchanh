@@ -38,7 +38,7 @@
 									 <p style="margin: 0px;">{{$lth->nhomthuchanh->hp_id}}: {{$lth->nhomthuchanh->hocphan->hp_ten}}</p>
 									 <p style="margin: 0px;">GV: {{$lth->nhomthuchanh->lophocphan->canbo->cb_ten}}</p>
 									<div style="background: #fff; color: #f5c5a3; padding: 5px; margin-top: 5px;">
-									<i class="fa fa-bell" style="cursor: pointer;" aria-hidden="true" data-toggle="modal" data-target="#myModal" onClick="Notify(`<?php echo $lth->tkb_ghichu;?>`)"></i>
+									<i class="fa fa-envelope-o" style="cursor: pointer;" aria-hidden="true" data-toggle="modal" data-target="#myModal" onClick="Notify(`<?php echo $lth->tkb_ghichu;?>`)"></i>
 									</div>
 								</div>
 								@endif

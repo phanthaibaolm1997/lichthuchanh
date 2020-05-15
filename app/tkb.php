@@ -42,6 +42,15 @@ class tkb extends Model
 		return $data;
 	}
 
+	public function calendarOfWeek($namhoc, $hocky, $week){
+		$data = tkb::where('tuan',$week)
+			->with(['nhomthuchanh'=> function($q) use($namhoc,$hocky){
+				    [$q->where('namhoc', $namhoc),$q->where('hocky', $hocky)];
+				}])
+			->get();
+		return $data;
+	}
+
 	public function createTKB($thu,$buoi,$tuan,$phong,$nhom){
 		$create = new tkb();
 		$create->buoi = $buoi;

@@ -26,4 +26,12 @@ class nhomthuchanh extends Model
 		return $this->hasMany('App\tkb', 'sttnhom');
 	}
 
+	public function getAllNhom(){
+		return nhomthuchanh::with('hocky')
+			->with('hocphan')
+			->with('namhoc')
+			->with('lophocphan')
+			->get();
+	}
+
 }

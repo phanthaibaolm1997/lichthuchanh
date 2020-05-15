@@ -27,7 +27,7 @@
 
 <body class="materialdesign mini-navbar">
     <div class="wrapper-pro">
-        <div class="left-sidebar-pro">
+        {{-- <div class="left-sidebar-pro">
             <nav id="sidebar" class="active">
                 <div class="sidebar-header">
                     <a href="#"><img src="{{ asset('assets/admin/img/message/1.jpg')}}" alt="" />
@@ -40,16 +40,17 @@
                     @include('admin.includes.sidebar')
                 </div>
             </nav>
-        </div>
-        <div class="content-inner-all">
+        </div> --}}
+        {{-- <div class="content-inner-all"> --}}
            <!-- HEADAER -->
-           @include('admin.includes.header')
-            <div class="google-maps-area mg-b-15">
+           
+            {{-- <div class="google-maps-area mg-b-15"> --}}
+                @include('admin.includes.header')
                 <div class="container-fluid">
                      @yield('content')
                 </div>
-            </div>
-        </div>
+            {{-- </div> --}}
+        {{-- </div> --}}
     </div>
     <script src="{{ asset('assets/admin/js/vendor/jquery-1.11.3.min.js')}}"></script>
     <script src="{{ asset('assets/admin/js/bootstrap.min.js')}}"></script>

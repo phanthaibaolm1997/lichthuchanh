@@ -99,8 +99,6 @@ class AdminController extends Controller
         $data['getAllPM'] = $phanmem->getAllPM();
         $data['getAllVersion'] = $version_software->getAllVersion();
 
-        // dd($data);
-
         return view('admin.contents.phanmem',$data);
     }
 
@@ -118,7 +116,6 @@ class AdminController extends Controller
 
         $pm_id = $request->pm_id;
         $version = $request->version;
-        // $ver_ma = $request->ver_ma;
         $ver_ma = DB::table('version_software')->max('ver_ma');
         $ver_ma = $ver_ma + 1;
 
