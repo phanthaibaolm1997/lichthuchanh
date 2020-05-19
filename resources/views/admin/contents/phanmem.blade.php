@@ -1,11 +1,13 @@
 @extends('admin.master')
 @section('content')
-<div class="container-fluid" style="background: #fff; margin-top: 10px; min-height: 100vh; padding-top: 30px">
+<div class="container-fluid" style="background: unset; margin-top: 10px; min-height: 100vh; padding-top: 30px">
 	<div class="row">
 		<div class="col-md-8">
-			<div class="d-flex" style="display: flex">
-				<h3  style="color: #de470f; font-weight: bold; flex-grow: 1">Phần Mềm</h3>
-				<button class="btn btn-primary" style="flex-basis: auto;" data-toggle="modal" data-target="#addPM"><i class="fa fa-plus" aria-hidden="true"></i> Phầm mềm</button>
+			<div class="card-title">
+				<div style="display: flex">
+					<h3 style="color: #de470f; font-weight: bold; flex-grow: 1">Phần Mềm</h3>
+					<button class="btn btn-primary" style="flex-basis: auto;" data-toggle="modal" data-target="#addPM"><i class="fa fa-plus" aria-hidden="true"></i> Phầm mềm</button>
+				</div>
 			</div>
 			<br/>
 			<table class="table table-bordered">
@@ -19,7 +21,7 @@
 				</thead>
 				<tbody>
 					@foreach($getAllPM as $pm)
-					<tr>
+					<tr class="card-title1 text-center">
 						<th> {{ $loop->iteration }}</th>
 						<td> {{ $pm->pm_ten }}</td>
 						<td> 
@@ -30,14 +32,14 @@
 						<td>
 							<button class="btn btn-success" data-toggle="modal" data-target="#addVerPM{{ $loop->iteration }}"><i class="fa fa-plus" aria-hidden="true"></i></button>
 							<button class="btn btn-primary"  data-toggle="modal" data-target="#editPM{{ $loop->iteration }}"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-							<a href="{{ url('admin/phan-mem/delete/') }}/{{$pm->pm_id}}"> <button class="btn btn-danger"><i class="fa fa-remove" aria-hidden="true"></i></button></a>
+							<a href="{{ url('admin/phan-mem/delete/') }}/{{$pm->pm_id}}" onclick="return confirm('Bạn có chắc muốn xóa phần mềm này?')"> <button class="btn btn-danger"><i class="fa fa-remove" aria-hidden="true"></i></button></a>
 						</td>
 					</tr>
 					<!-- Modal add version -->
-					<div id="addVerPM{{ $loop->iteration }}" class="modal fade" role="dialog">
-						<div class="modal-dialog">
+					<div id="addVerPM{{ $loop->iteration }}" class="modal fade" role="dialog" style="padding-right: 0px !important;">
+						<div class="modal-dialog" >
 							<div class="modal-content">
-								<div class="modal-header" style="background: #de470f; color: #fff;">
+								<div class="modal-header" style="background: #f5f6f7; color: #7e7d7d; ">
 									<button type="button" class="close" data-dismiss="modal">&times;</button>
 									<h4 class="modal-title">Add Version</h4>
 								</div>
@@ -63,10 +65,10 @@
 						</div>
 					</div>
 					<!-- Modal add version -->
-					<div id="editPM{{ $loop->iteration }}" class="modal fade" role="dialog">
-						<div class="modal-dialog">
+					<div id="editPM{{ $loop->iteration }}" class="modal fade" role="dialog" style="padding-right: 0px !important;">
+						<div class="modal-dialog" >
 							<div class="modal-content">
-								<div class="modal-header" style="background: #de470f; color: #fff;">
+								<div class="modal-header" style="background: #f5f6f7; color: #7e7d7d; ">
 									<button type="button" class="close" data-dismiss="modal">&times;</button>
 									<h4 class="modal-title">Chỉnh sửa phần mềm</h4>
 								</div>
@@ -92,7 +94,9 @@
 			</table>
 		</div>
 		<div class="col-md-4">
-			<h3  style="color: #de470f; font-weight: bold">Phiên bản</h3>
+			<div class="card-title">
+				<h3  style="color: #de470f; font-weight: bold">Phiên bản</h3>
+			</div>
 			<br/>
 			<table class="table table-bordered">
 				<thead>
@@ -105,14 +109,14 @@
 				</thead>
 				<tbody>
 					@foreach($getAllVersion as $version)
-					<tr>
+					<tr class="card-title1 text-center">
 						<th> {{ $loop->iteration }}</th>
 						<th> {{ $version->phanmem->pm_ten }}</th>
 						<td> 
 							<button class="btn btn-primary">{{ $version->version }}</button>
 						</td>
 						<td>
-							<a href="{{ url('admin/phan-mem/delete-version/') }}/{{$version->pm_id}}/{{$version->ver_ma}}"><button class="btn btn-danger"><i class="fa fa-remove" aria-hidden="true"></i></button>
+							<a href="{{ url('admin/phan-mem/delete-version/') }}/{{$version->pm_id}}/{{$version->ver_ma}}" onclick="return confirm('Bạn có chắc muốn xóa version này?')"><button class="btn btn-danger"><i class="fa fa-remove" aria-hidden="true"></i></button>
 						</td>
 					</tr>
 					@endforeach
@@ -122,10 +126,10 @@
 	</div>
 </div>
 <!-- Modal Phần mềm -->
-<div id="addPM" class="modal fade" role="dialog">
-	<div class="modal-dialog">
+<div id="addPM" class="modal fade" role="dialog" style="padding-right: 0px !important;">
+	<div class="modal-dialog" >
 		<div class="modal-content">
-			<div class="modal-header" style="background: #de470f; color: #fff;">
+			<div class="modal-header" style="background: #f5f6f7; color: #7e7d7d; ">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 				<h4 class="modal-title">Thêm mới phần mềm</h4>
 			</div>

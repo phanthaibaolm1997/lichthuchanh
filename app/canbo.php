@@ -23,7 +23,9 @@ class canbo extends Authenticatable
 	}
 
 	public function getAllCanBo(){
-		return canbo::with('quyen')->get();
+		return canbo::with('quyen')
+			->with('lophocphan')
+			->get();
 	}
 
 
@@ -56,6 +58,10 @@ class canbo extends Authenticatable
 
 	public function deleteCB($id){
 		canbo::where('cb_id',$id)->delete();
+	}
+
+	public function getGV(){
+		return canbo::where('q_ma',2)->get();
 	}
 
 }

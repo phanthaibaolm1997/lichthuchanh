@@ -37,4 +37,35 @@ class hocphan extends Model
 			->paginate($paginate);
 		return $data;
 	}
+
+	public function createHP($hp_id, $hp_ten){
+		$create = new hocphan();
+		$create->hp_id = $hp_id;
+		$create->hp_ten = $hp_ten;
+		$create->save();
+
+		if ($create) {
+			return true;
+		}
+		return false;
+	}
+
+	public function editHP($hp_id, $hp_ten){
+		$edit = hocphan::where('hp_id',$hp_id)
+			->update([
+				'hp_ten' => $hp_ten
+			]);
+		if ($edit) {
+			return true;
+		}
+		return false;
+	}
+
+	public function deleteHP($id){
+		$delete = hocphan::where('hp_id',$id)->delete();
+		if ($delete) {
+			return true;
+		}
+		return false;
+	}
 }

@@ -1,17 +1,17 @@
 @extends('admin.master')
 @section('content')
 <div class="container-fluid" style="background: #f5f6f7; margin-top: 10px; min-height: 100vh; padding-top: 30px">
-	<div class="d-flex" style="display: flex">
+	<div class="d-flex card-title1" style="display: flex">
 		<div style="width: 93%; margin: auto">
-			<h3  style="color: #de470f; font-weight: bold; padding: 10px;  box-shadow: -4px -2px 4px 0 #fff, 4px 2px 6px 0 #dfe4ea, inset 0 0 1px 0 #c4c4c4, 3px 3px 5px -3px #c4c4c4; border-radius: 4px;">{{$getDetailPhong->phong_ten}}</h3>
+			<h3  style="color: #de470f; font-weight: bold; padding: 10px;"><i class="fa fa-home" aria-hidden="true" style="font-size: 2em; color: #de470f;"></i> - {{$getDetailPhong->phong_ten}}</h3>
 		</div>
 	</div>
 	<br/>
 	<div class="container-fluid">
-		<div style="width: 95%; margin: auto">
+		<div style="width: 100%; margin: auto">
 			<div class="row">
 				<div class="col-md-6">
-					<div style="padding: 10px; border-radius: 5px; box-shadow: -4px -2px 4px 0 #fff, 4px 2px 6px 0 #dfe4ea, inset 0 0 1px 0 #c4c4c4, 3px 3px 5px -3px #c4c4c4; min-height: 50vh">
+					<div style="background-color: #fff; padding: 10px; border-radius: 5px; box-shadow: -4px -2px 4px 0 #fff, 4px 2px 6px 0 #dfe4ea, inset 0 0 1px 0 #c4c4c4, 3px 3px 5px -3px #c4c4c4; min-height: 50vh">
 						<h3  style="color: #de470f; font-weight: bold; padding: 10px;">Thông tin phòng</h3>
 						<hr>
 						<div style="padding: 10px;  box-shadow: -4px -2px 4px 0 #fff, 4px 2px 6px 0 #dfe4ea, inset 0 0 1px 0 #c4c4c4, 3px 3px 5px -3px #c4c4c4; border-radius: 4px;  font-weight: bold;">
@@ -28,7 +28,7 @@
 					</div>
 				</div>
 				<div class="col-md-6">
-					<div style="padding: 10px; border-radius: 5px; box-shadow: -4px -2px 4px 0 #fff, 4px 2px 6px 0 #dfe4ea, inset 0 0 1px 0 #c4c4c4, 3px 3px 5px -3px #c4c4c4; min-height: 50vh">
+					<div style="background-color: #fff; padding: 10px; border-radius: 5px; box-shadow: -4px -2px 4px 0 #fff, 4px 2px 6px 0 #dfe4ea, inset 0 0 1px 0 #c4c4c4, 3px 3px 5px -3px #c4c4c4; min-height: 50vh">
 						<div style="display: flex">
 							<h3  style="color: #de470f; font-weight: bold; padding: 10px; flex-grow: 1">Phần mềm</h3>
 							<button class="btn btn-primary" data-toggle="modal" data-target="#addPM" style="flex-basis: auto;"><i class="fa fa-plus" aria-hidden="true"></i> Thêm phần mềm</button>

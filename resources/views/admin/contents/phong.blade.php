@@ -1,8 +1,9 @@
 @extends('admin.master')
 @section('content')
-<div class="container-fluid" >
+<div class="container-fluid">
+	<br/>
 	<div class="card-title">
-		<div class="d-flex" style="display: flex">
+		<div class="d-flex" style="display: flex;">
 			<h3  style="color: #de470f; font-weight: bold; flex-grow: 1">QUẢN LÝ PHÒNG</h3>
 			<button class="btn btn-primary" style="flex-basis: auto;" data-toggle="modal" data-target="#addPhong"><i class="fa fa-plus" aria-hidden="true"></i> Room</button>
 		</div>
@@ -12,7 +13,7 @@
 			
 			@foreach($getAllPhong as $phong)
 			<div class="col-md-3">
-				<div style="border-radius: 5px;  padding: 10px 0px; box-shadow: -4px -2px 4px 0 #fff, 4px 2px 6px 0 #dfe4ea, inset 0 0 1px 0 #c4c4c4, 3px 3px 5px -3px #c4c4c4;">
+				<div style="background-color: #fff; border-radius: 5px;  padding: 10px 0px; box-shadow: -4px -2px 4px 0 #fff, 4px 2px 6px 0 #dfe4ea, inset 0 0 1px 0 #c4c4c4, 3px 3px 5px -3px #c4c4c4;">
 					<div class="row">
 						<div class="col-md-5 text-center">
 							<i class="fa fa-home" aria-hidden="true" style="font-size: 8em; color: #de470f;"></i>

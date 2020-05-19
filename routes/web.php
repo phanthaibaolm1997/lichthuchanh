@@ -23,7 +23,16 @@ Route::group(['prefix'=>'admin'],function(){
 	Route::get('/auto', 'SapLichController@autoScheduling');
 	Route::get('/thoi-khoa-bieu', 'AdminController@getTKBAdmin')->name('admin.thoikhoabieu');
 	Route::post('/change-lich', 'AdminController@postChangeLich')->name('admin.changelich');
-	Route::get('/hoc-phan', 'AdminController@getHocPhan')->name('admin.hocphan');
+	Route::group(['prefix'=>'hoc-phan'],function(){
+		Route::get('/', 'AdminController@getHocPhan')->name('admin.hocphan');
+		Route::post('/add-lhp', 'AdminController@postLHP')->name('admin.post.dangkylophocphan');
+		Route::post('/edit-lhp', 'AdminController@editLHP')->name('admin.edit.lophocphan');
+		Route::get('/delete-lhp/{cb_id}/{hp_id}/{namhoc}/{hocky}/{sttl}', 'AdminController@deleteLHP')->name('admin.delete.lophocphan');
+		Route::post('/add-hp', 'AdminController@postHP')->name('admin.post.hocphan');
+		Route::post('/edit-hp', 'AdminController@editHP')->name('admin.edit.hocphan');
+		Route::get('/delete-hp/{id}', 'AdminController@deleteHP')->name('admin.delete.hocphan');
+	});
+	
 	Route::group(['prefix'=>'phan-mem'],function(){
 		Route::get('/', 'AdminController@getPhanMem')->name('admin.phanmem');
 		Route::post('/', 'AdminController@postPhanMem')->name('admin.phanmem.add');

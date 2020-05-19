@@ -1,13 +1,14 @@
 @extends('admin.master')
 @section('content')
-<div class="container-fluid" style="background: #fff; margin-top: 10px; min-height: 100vh; padding-top: 30px">
+<div class="container-fluid" style="background: unset; margin-top: 10px; min-height: 100vh; padding-top: 30px">
 	<div class="row">
 		<div class="col-md-12">
-			<h3 class="text-center" style="    color: #de470f;
-			font-weight: bold;">LỊCH THỰC HÀNH</h3>
+			<div class="card-title">
+				<h3 class="text-center" style="color: #de470f; font-weight: bold;">LỊCH THỰC HÀNH</h3>
+			</div>
 			<ul class="nav nav-tabs">
 				@foreach($getAllTuan as $tuan)
-				<li @if($loop->iteration == 1) class="active" @endif><a data-toggle="tab" href="#tuan_{{$tuan->tuan}}">Tuần {{$tuan->tuan}}</a></li>
+				<li @if($loop->iteration == 1) class="active" style="color: #000 !important"  @endif ><a data-toggle="tab" href="#tuan_{{$tuan->tuan}}" style="background-color: #de470f; color: #fff;">Tuần {{$tuan->tuan}}</a></li>
 				@endforeach
 			</ul>
 			<div class="tab-content">
@@ -39,11 +40,11 @@
 							@foreach($getAllPhong as $phong)
 							<tr>
 								@if($loop->iteration == 1) 
-								<th rowspan="{{count($getAllPhong)}}" >{{$buoi->buoi}}</th>
+								<th rowspan="{{count($getAllPhong)}}" style="background-color: #de470f; color: #fff;">{{$buoi->buoi}}</th>
 								@endif
-								<th>{{ $phong->phong_ten }}</th>
+								<th style="text-align: center; color: #de470f; background: #fff;">{{ $phong->phong_ten }}</th>
 								@foreach($getAllThu as $thu)
-								<td style="width: 200px; height: 60px;">
+								<td style="width: 200px; height: 60px;" class="card-title1">
 									@foreach($getLichThucHanh as $lth)
 									@if($tuan->tuan === $lth->tuan AND $buoi->buoi === $lth->buoi AND $phong->phong_stt === $lth->phong_stt AND $thu->thu === $lth->thu  )
 									<div class="registered">

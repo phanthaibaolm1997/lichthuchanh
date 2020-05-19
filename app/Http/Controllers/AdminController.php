@@ -13,6 +13,7 @@ use App\phanmem;
 use App\phanmemphong;
 use App\version_software;
 use App\canbo;
+use App\lophocphan;
 use DB;
 use Carbon\Carbon;
 use Session;
@@ -85,9 +86,9 @@ class AdminController extends Controller
 
     public function getHocPhan(Request $request){
         $hocphan = new hocphan();
-
-        $data['getAllHP'] = $hocphan->getAllHP(10);
-        // dd($data);
+        $canbo = new canbo();
+        $data['getAllHP'] = $hocphan->getAllHP(100);
+        $data['getGV'] = $canbo->getGV();
 
         return view('admin.contents.hocphan',$data);
     }
@@ -128,7 +129,6 @@ class AdminController extends Controller
 
         $pm_id = $request->pm_id;
         $name = $request->name;
-
         $phanmem->editPM($name,$pm_id);
 
         return redirect()->back()->with('success', 'Sửa thành công!');
@@ -260,4 +260,86 @@ class AdminController extends Controller
         $canbo->deleteCB($id);
         return redirect()->back()->with('success', 'Delte thành công!');
     }
+
+    public function postLHP(Request $request){
+        $cb_id = $request->cb_id;
+        $ten_lhp = $request->ten_lhp;
+        $soluong_lhp = $request->soluong_lhp;
+        $hp_id = $request->hp_id;
+        $semester = $this->checkSemester($this->thisMonth);
+
+        $lophocphan = new lophocphan();
+        $result = $lophocphan->createLHP($cb_id,$ten_lhp,$soluong_lhp,$hp_id,$this->thisSchoolYear,$semester);
+        if($result){
+            return redirect()->back()->with('success', 'Đăng ký lớp học phần thành công!'); 
+        }
+        return redirect()->back()->with('errors', 'Có lỗi xãy ra!'); 
+
+    }
+    public function editLHP(Request $request){
+        $cb_id = $request->cb_id;
+        $lhp_ten = $request->lhp_ten;
+        $lhp_soluongdk = $request->lhp_soluongdk;
+        $hp_id = $request->hp_id;
+        $hocky =  $request->hocky;
+        $namhoc =  $request->namhoc;
+        $sttl =  $request->sttl;
+
+        $lophocphan = new lophocphan();
+        $result = $lophocphan->eidtLHP($cb_id,$lhp_ten,$lhp_soluongdk,$hp_id,$namhoc,$hocky,$sttl);
+        if($result){
+            return redirect()->back()->with('success', 'Chỉnh sửa lớp học phần thành công!'); 
+        }
+        return redirect()->back()->with('errors', 'Có lỗi xãy ra!'); 
+
+    }
+
+    public function postHP(Request $request){
+        $hp_id = $request->code;
+        $hp_ten = $request->name;
+
+        $hocphan = new hocphan();
+        $result = $hocphan->createHP($hp_id,$hp_ten);
+
+        if($result){
+            return redirect()->back()->with('success', 'Đăng ký học phần thành công!'); 
+        }
+        return redirect()->back()->with('errors', 'Có lỗi xãy ra!'); 
+
+    }
+
+    public function editHP(Request $request){
+        $hp_id = $request->hp_id;
+        $hp_ten = $request->hp_ten;
+
+        $hocphan = new hocphan();
+        $result = $hocphan->editHP($hp_id,$hp_ten);
+
+        if($result){
+            return redirect()->back()->with('success', 'Đăng ký học phần thành công!'); 
+        }
+        return redirect()->back()->with('errors', 'Có lỗi xãy ra!'); 
+    }
+
+    public function deleteHP($id){
+        $hocphan = new hocphan();
+        $result = $hocphan->deleteHP($id);
+
+        if($result){
+            return redirect()->back()->with('success', 'Xóa học phần thành công!'); 
+        }
+        return redirect()->back()->with('errors', 'Có lỗi xãy ra!'); 
+
+    }
+    public function deleteLHP($cb_id,$hp_id,$namhoc,$hocky,$sttl){
+        $lophocphan = new lophocphan();
+        $result = $lophocphan->deleteLHP($cb_id,$hp_id,$namhoc,$hocky,$sttl);
+        
+        if($result){
+            return redirect()->back()->with('success', 'Xóa học phần thành công!'); 
+        }
+        return redirect()->back()->with('errors', 'Có lỗi xãy ra!'); 
+
+    }
 }
+
