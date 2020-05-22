@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 
 // Public Router
+Route::get('/home', 'IndexController@goBackHome')->name('backhome');
 Route::get('/', 'IndexController@getIndex')->name('home');
 Route::get('/login-admin', 'LoginController@getLoginAdmin')->name('login');
 Route::post('/login-admin', 'LoginController@postLoginAdmin')->name('admin.login.post');

@@ -129,6 +129,10 @@ class IndexController extends Controller
         return back();
     }
 
+    public function goBackHome(){
+        return view('page.home');
+    }
+
     
 }
 

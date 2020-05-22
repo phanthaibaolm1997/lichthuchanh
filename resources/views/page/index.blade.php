@@ -3,8 +3,11 @@
 
 <div class="row">
 	<div class="col-md-12">
-		<h3 class="text-center" style="    color: #de470f;
-		font-weight: bold;">LỊCH THỰC HÀNH</h3>
+		<div class="card-title">
+			<h3 class="text-center" style="color: #de470f; font-weight: bold;">LỊCH THỰC HÀNH</h3>
+		</div>
+		<br/>
+		<br/>
 		<ul class="nav nav-tabs">
 			@foreach($getAllTuan as $tuan)
 			<li @if($loop->iteration == 1) class="active" @endif><a data-toggle="tab" href="#tuan_{{$tuan->tuan}}">Tuần {{$tuan->tuan}}</a></li>
@@ -13,7 +16,7 @@
 		<div class="tab-content">
 			@foreach($getAllTuan as $tuan)
 			<div id="tuan_{{$tuan->tuan}}" class="tab-pane fade in @if($loop->iteration == 1) active @endif">
-				<table class="table table-bordered text-center table_lth" align="center">
+				<table class="table table-bordered text-center table_lth" align="center" style="background-color: #fff;">
 					<tbody>
 						<tr style="height: 50px; background: #de470f; color: #fff;">
 							<th style="line-height: 50px; text-align: center;">Buổi</th>
@@ -26,9 +29,9 @@
 						@foreach($getAllPhong as $phong)
 						<tr>
 							@if($loop->iteration == 1) 
-							<th rowspan="{{count($getAllPhong)}}" >{{$buoi->buoi}}</th>
+							<th rowspan="{{count($getAllPhong)}}" style="background-color: #de470f; color: #fff; vertical-align: middle; text-align: center;">{{$buoi->buoi}}</th>
 							@endif
-							<th>{{ $phong->phong_ten }}</th>
+							<th style="vertical-align: middle; text-align: center; color: #de470f;">{{ $phong->phong_ten }}</th>
 							@foreach($getAllThu as $thu)
 							<td style="width: 200px; height: 60px;">
 								@foreach($getLichThucHanh as $lth)

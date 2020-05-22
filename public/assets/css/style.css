@@ -1,5 +1,5 @@
 .nav-tabs {
-  margin: 30px auto;
+  /* margin: 30px auto; */
 }
 .nav-tabs > li {
   margin-left: -1px;
@@ -347,4 +347,20 @@ footer {
     width: 100%;
     margin-bottom: 20px;
   }
+}
+
+.card-title{
+  border-radius: 5px;  
+  padding: 10px 0px; box-shadow: -4px -2px 4px 0 #fff0, 4px 2px 6px 0 #dfe4ea, inset 0 0 1px 0 #c4c4c4, 3px 3px 5px -3px #c4c4c4; 
+  background-color: #fff; 
+  margin-bottom: 10px; 
+  padding: 25px;
+}
+.alignVertical{
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%,-50%);
 }
