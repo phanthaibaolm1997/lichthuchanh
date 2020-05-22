@@ -8,15 +8,15 @@
 			<button class="btn btn-primary" style="flex-basis: auto;" data-toggle="modal" data-target="#addPhong"><i class="fa fa-plus" aria-hidden="true"></i> Room</button>
 		</div>
 	</div>
-	<div class="container-fluid" style="background: #f5f6f7; margin-top: 10px; min-height: 100vh; padding-top: 30px">
+	<div class="container-fluid" style=" margin-top: 10px; min-height: 100vh; padding-top: 30px">
 		<div class="row">
 			
 			@foreach($getAllPhong as $phong)
 			<div class="col-md-3">
-				<div style="background-color: #fff; border-radius: 5px;  padding: 10px 0px; box-shadow: -4px -2px 4px 0 #fff, 4px 2px 6px 0 #dfe4ea, inset 0 0 1px 0 #c4c4c4, 3px 3px 5px -3px #c4c4c4;">
+				<div style="margin-top: 25px;background-color: #fff; border-radius: 5px;  padding: 10px 0px; box-shadow: -4px -2px 4px 0 #fff, 4px 2px 6px 0 #dfe4ea, inset 0 0 1px 0 #c4c4c4, 3px 3px 5px -3px #c4c4c4;">
 					<div class="row">
 						<div class="col-md-5 text-center">
-							<i class="fa fa-home" aria-hidden="true" style="font-size: 8em; color: #de470f;"></i>
+							<i class="fa fa-home" aria-hidden="true" style="font-size: 8em; color: #337ab7;"></i>
 						</div>
 						<div class="col-md-7" >
 							<div style="margin-top: 1.5em">

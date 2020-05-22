@@ -2,8 +2,11 @@
 @section('content')
 <div class="row">
 	<div class="col-md-12">
-		<h3 class="text-center" style="    color: #de470f;
-		font-weight: bold;">LỊCH CỦA ĐÃ ĐĂNG KÝ</h3>
+		<div class="card-title">
+			<h3 class="text-center" style="color: #de470f; font-weight: bold;">LỊCH ĐÃ ĐĂNG KÝ</h3>
+		</div>
+		<br/>
+		<br/>
 		<ul class="nav nav-tabs">
 			@foreach($getAllTuan as $tuan)
 			<li @if($loop->iteration == 1) class="active" @endif><a data-toggle="tab" href="#tuan_{{$tuan->tuan}}">Tuần {{$tuan->tuan}}</a></li>

@@ -1,14 +1,44 @@
 @extends('page.master')
 @section('content')
+
 <div class="row">
-	<div class="col-md-10">
-		<h3 class="text-center" style="    color: #de470f;
-		font-weight: bold;">ĐĂNG KÝ LỊCH THỰC HÀNH</h3>
+	<div class="col-md-12">
+		<div class="filter_lth">
+			<h4 class="text-center">Nâng cao</h4>
+			<div class="row">
+				<div class="col-md-4">
+					<label><i class="fa fa-qrcode" aria-hidden="true"></i> Chọn phần mềm</label>
+					<select class="form-control">
+						<option>Điện toán</option>
+					</select>
+				</div>
+				<div class="col-md-4">
+					<label> <i class="fa fa-desktop" aria-hidden="true"></i> Chọn CPU</label>
+					<select class="form-control">
+						<option>Điện toán</option>
+					</select>
+				</div>
+				<div class="col-md-4">
+					<label><i class="fa fa-microchip" aria-hidden="true"></i> Số lượng máy</label>
+					<select class="form-control">
+						<option>Điện toán</option>
+					</select>
+				</div>
+			</div>
+			<br/>
+			<p class="text-right"><button class="btn btn-default"> Tìm kiếm</button></p>
+		</div>
+	</div>
+	<div class="col-md-12" style="margin-top: 20px;">
+		<div class="card-title">
+			<h3 class="text-center" style="color: #de470f; font-weight: bold;">ĐĂNG KÝ LỊCH</h3>
+		</div>
+		<br/>
+		<br/>
 		<ul class="nav nav-tabs">
 			@foreach($getAllTuan as $tuan)
 			<li @if($loop->iteration == 1) class="active" @endif><a data-toggle="tab" href="#tuan_{{$tuan->tuan}}">Tuần {{$tuan->tuan}}</a></li>
 			@endforeach
-
 		</ul>
 
 		<div class="tab-content">
@@ -27,9 +57,9 @@
 						@foreach($getAllPhong as $phong)
 						<tr>
 							@if($loop->iteration == 1) 
-							<th rowspan="{{count($getAllPhong)}}">{{$buoi->buoi}}</th>
+							<th rowspan="{{count($getAllPhong)}}"  style="background-color: #de470f; color: #fff; vertical-align: middle; text-align: center;">{{$buoi->buoi}}</th>
 							@endif
-							<th>{{ $phong->phong_ten }}</th>
+							<th style="vertical-align: middle; text-align: center; color: #de470f;">{{ $phong->phong_ten }}</th>
 							@foreach($getAllThu as $thu)
 							<td style="width: 200px; height: 60px;">
 								<?php $flag = 0; ?>
@@ -67,29 +97,7 @@
 			@endforeach
 		</div>
 	</div>
-	<div class="col-md-2">
-		<div class="filter_lth">
-			<h4 class="text-center">Nâng cao</h4>
-			<br>
-			<label><i class="fa fa-qrcode" aria-hidden="true"></i> Chọn phần mềm</label>
-			<select class="form-control">
-				<option>Điện toán</option>
-			</select>
-			<br/>
-			<label> <i class="fa fa-desktop" aria-hidden="true"></i> Chọn CPU</label>
-			<select class="form-control">
-				<option>Điện toán</option>
-			</select>
-			<br/>
-			<label><i class="fa fa-microchip" aria-hidden="true"></i> Số lượng máy</label>
-			<select class="form-control">
-				<option>Điện toán</option>
-			</select>
-			<br>
-			<button style="width: 100%" class="btn btn-default"> Tìm kiếm</button>
-			<br/>
-		</div>
-	</div>
+	
 </div>
 @endsection
 

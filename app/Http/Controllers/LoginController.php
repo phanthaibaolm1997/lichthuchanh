@@ -23,7 +23,7 @@ class LoginController extends Controller
 			}else{
 				$request->session()->put('session_canbo_email', $request->input('email'));
 				$request->session()->put('session_canbo_id', Auth::guard('canbo')->user()->cb_id);
-				return redirect()->route('home');
+				return redirect()->route('backhome');
 			}
 		}
     	return redirect()->back()->with('errors', "Đăng nhập thất bại vui lòng thử lại");

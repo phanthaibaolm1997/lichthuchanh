@@ -18,9 +18,7 @@
       <nav>
         <ul>
           @if(Session::has('session_canbo_id'))
-              <li><a href="{{ route('canbo.dangkylich') }}">Đăng ký lịch</a></li>
-              <li><a href="{{ route('canbo.quanlydk') }}">Lịch của bạn</a></li>
-              <li><a href="{{ route('logout') }}">Thoát</a></li>
+              <li><a href="{{ route('backhome') }}">Trang Quản lý</a></li>
           @else
               <li><a href="{{ route('login') }}">Đăng nhập</a></li>
           @endif
