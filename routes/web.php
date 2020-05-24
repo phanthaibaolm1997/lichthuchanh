@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 // Public Router
 Route::get('/home', 'IndexController@goBackHome')->name('backhome');
 Route::get('/', 'IndexController@getIndex')->name('home');
+Route::get('/test', 'SapLichController@test')->name('xxx');
 Route::get('/login-admin', 'LoginController@getLoginAdmin')->name('login');
 Route::post('/login-admin', 'LoginController@postLoginAdmin')->name('admin.login.post');
  Route::get('logout/', 'LoginController@logout')->name('logout');
@@ -32,6 +33,7 @@ Route::group(['prefix'=>'admin'],function(){
 		Route::post('/add-hp', 'AdminController@postHP')->name('admin.post.hocphan');
 		Route::post('/edit-hp', 'AdminController@editHP')->name('admin.edit.hocphan');
 		Route::get('/delete-hp/{id}', 'AdminController@deleteHP')->name('admin.delete.hocphan');
+		Route::get('/dangkythuchanh/{cb_id}/{hp_id}/{namhoc}/{hocky}/{sttl}', 'AdminController@updateThucHanh')->name('admin.dangkythuchanh');
 	});
 	
 	Route::group(['prefix'=>'phan-mem'],function(){

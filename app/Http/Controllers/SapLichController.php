@@ -17,156 +17,229 @@ use Carbon\Carbon;
 
 class SapLichController extends Controller
 {
-	private $adjacencyMatrix;       // connection/adjacency table
-    private $colorsVector;          // list of colors
-    private $coloredVertices;       // lost of colored vertices
-    private $matrixSize = 0;        // size of $adjacencyMatrix
-    private $chromaticNo = 0;       // finale chormatic number after coloring
 
-	public function __construct($sizeMatrix){
-		$this->thisYear = Carbon::now()->year;
-		$this->thisMonth = Carbon::now()->month;
-		$this->thisSchoolYear = $this->thisYear."-".($this->thisYear+1);
 
-		// init adjacency table
-        $this->matrixSize = $sizeMatrix;
-        for($i = 0; $i < $this->matrixSize; $i++) {
-            for ($y = 0; $y < $this->matrixSize; $y++) {
-                $this->adjacencyMatrix[$i][$y] = 0;
-            }
+    public function __construct(){
+        $this->thisYear = Carbon::now()->year;
+        $this->thisMonth = Carbon::now()->month;
+        $this->thisSchoolYear = $this->thisYear."-".($this->thisYear+1);
+    }
+
+    protected function _CheckSemester($coloronth){
+        $coloronthInHK = array(8,9,10,11,12);
+        if(in_array($coloronth, $coloronthInHK)){
+           return  1;
         }
-        // init colors vector = result of coloring
-        $this->colorsVector[0] = 0;
-        for($i=1;$i < $this->matrixSize; $i++) { $this->colorsVector[$i] = -1; }
-        // init colored vertices
-        for($i=0;$i < $this->matrixSize; $i++) { $this->coloredVertices[$i] = false; }
-	}
 
-	protected function _CheckSemester($month){
-		$monthInHK = array(8,9,10,11,12);
-		if(in_array($month, $monthInHK)){
-		   return  1;
-		}
-		return 2;  
-	}
-	protected function _CalendarOfWeek($week){
-		$tkb = new tkb();
-		$semester = $this->_CheckSemester($this->thisMonth);
-		$calendar = $tkb->calendarOfWeek($this->thisSchoolYear,$semester,$week);
-		return $calendar;
-	}
-	protected function _AllOfDay(){
-		$thu = new thu();
-		$days = $thu->getAllThu();
-		return $days;
-	}
-	protected function _AllOfRoom(){
-		$phong = new phong();
-		$room = $phong->getAllPhong();
-		return $room;
-	}
-	protected function _AllGroup(){
-		$nhomthuchanh = new nhomthuchanh();
-		$group = $nhomthuchanh->getAllNhom();
-		return $group;
-	}
-	protected function _ScoresOfCalendar(){
-		$week = 1;
-		$arrScore = [];
+        return 2;  
+    }
+    protected function _CalendarOfWeek($week){
+        $tkb = new tkb();
+        $semester = $this->_CheckSemester($this->thisMonth);
+        $calendar = $tkb->calendarOfWeek($this->thisSchoolYear,$semester,$week);
+        return $calendar;
+    }
+    protected function _AllOfDay(){
+        $thu = new thu();
+        $days = $thu->getAllThu();
+        return $days;
+    }
+    protected function _AllOfRoom(){
+        $phong = new phong();
+        $room = $phong->getAllPhong();
+        return $room;
+    }
+    protected function _AllOfWeek(){
+        $tuan = new tuan();
+        $tuan = $tuan->getAllTuan();
+        return $tuan;
+    }
+    protected function _AllGroup(){
+        $nhomthuchanh = new nhomthuchanh();
+        $group = $nhomthuchanh->getAllNhom();
+        return $group;
+    }
+    protected function _ScoresOfCalendar(){
+        $week = 1;
+        $arrDegreesrrScore = [];
 
-		// $calendarOfWeek = $this->_CalendarOfWeek($week);
-		$allOfDay = $this->_AllOfDay();
-		$allOfRoom = $this->_AllOfRoom();
-		$allGroup = $this->_AllGroup();
-		foreach ($allGroup as $group) {
-			$number = $group->nth_siso;
+        // $calendarOfWeek = $this->_CalendarOfWeek($week);
+        $arrDegreesllOfDay = $this->_AllOfDay();
+        $arrDegreesllOfRoom = $this->_AllOfRoom();
+        $arrDegreesllGroup = $this->_AllGroup();
+        foreach ($arrDegreesllGroup as $group) {
+            $number = $group->nth_siso;
 
-		}
-	}
-
-	public function autoScheduling(Request $request){
-		$week = 1;
-		// $data['calendarOfWeek'] = $this->_CalendarOfWeek($week);
-		// $data['allOfDay'] = $this->_AllOfDay();
-		// $data['allOfRoom'] = $this->_AllOfRoom();
-		$this->_ScoresOfCalendar();
-
-		return view('admin.contents.auto_schedule',$data);
-	}
-
-	// XXXXXXXXXXXXXXXXXXXXXXXXXXX
-    
-    public function listElements() {
-        echo "__ |";
-        for ($y = 0; $y < $this->matrixSize; $y++) {
-            echo $y . " | ";
         }
-        echo "<br>\n";
-        for($i = 0; $i < $this->matrixSize; $i++) {
-            echo $i." | ";
-            for ($y = 0; $y < $this->matrixSize; $y++) {
-                echo $this->adjacencyMatrix[$i][$y]." | ";
-            }
-            echo "<br>\n";
-        }        
-    }
-    
-    public function getColors() {
-        echo "<p>\n";
-        for ($i = 0; $i < $this->matrixSize; $i++)
-            echo "Vertex " .$i. " --->  Color " .$this->colorsVector[$i]."<br>\n";
-        echo "</p>\n";
     }
 
-    public function getAdjacencyMatrix() {
-        return $this->adjacencyMatrix;
+    public function autoScheduling(Request $request){
+        $week = 1;
+        // $data['calendarOfWeek'] = $this->_CalendarOfWeek($week);
+        // $data['allOfDay'] = $this->_AllOfDay();
+        // $data['allOfRoom'] = $this->_AllOfRoom();
+        $this->_ScoresOfCalendar();
+
+        return view('admin.contents.auto_schedule',$data);
     }
-    
-    public function getColorsVector() {
-        return $this->colorsVector;
-    }
-    
-    public function getChromaticNo() {
-        for($i = 0; $i < count($this->colorsVector); $i++) {
-            if ($this->colorsVector[$i] > $this->chromaticNo) { $this->chromaticNo = $this->colorsVector[$i]; }          
-        }        
-        return ++$this->chromaticNo;
+    public function allPracticeGroup(){
+        $nhomthuchanh = new nhomthuchanh();
+        $week = 1;
+        $semester = $this->_CheckSemester($this->thisMonth);
+        $calendar = $nhomthuchanh->allPracticeGroup($this->thisSchoolYear,$semester);
+        return $calendar;
     }
 
-    public function setVertex($row,$column) {
-        if($row > $this->matrixSize || $column > $this->matrixSize) { return false; }
-        $this->adjacencyMatrix[$row][$column] = $this->adjacencyMatrix[$column][$row] = 1;
-        return true;
-    }
-    
-    public function coloringGraph() {
-        for ($j = 1; $j < $this->matrixSize; $j++) {
-            // Color adjacent vertices with different colors
-            for ($i = 0; $i < $this->matrixSize; $i++) {
-                if ( ($this->colorsVector[$i] != -1) && ($this->adjacencyMatrix[$j][$i] > 0) ) {
-                    $this->coloredVertices[$this->colorsVector[$i]] = true;
-                }
+    protected function convertData($data){
+        $resultData = [];
+        $resultVertices = [];
+        $arrTemp = [];
+        $swag = array();
+        $index = 1;
+        $len = count($data);
+        foreach ($data as $obj) {
+            $keyGV = $obj->lophocphan->canbo->cb_id;
+            $key = [$obj->sttnhom,$keyGV];
+
+
+            array_push($resultVertices, $key);
+            if(in_array($keyGV , $arrTemp)){
+                array_push($swag[$keyGV], $index);
+            }else{
+                $swag[$keyGV]= array();
+                array_push($swag[$keyGV], $index);
+                array_push($arrTemp, $keyGV);
             }
-            // Search the 1st free color
-            for ($cr = 0;$cr < $this->matrixSize; $cr++) 
-                if ($this->coloredVertices[$cr] == false)
-                    break;
-            $this->colorsVector[$j] = $cr;
-            // Reset for next iteration         
-            for ($i = 0; $i < $this->matrixSize; $i++) {
-                if ( ($this->colorsVector[$i] != -1) && ($this->adjacencyMatrix[$j][$i] > 0) ) {
-                    $this->coloredVertices[$this->colorsVector[$i]] = false;
+
+            $index++;
+        }
+        
+        foreach ($swag as $sw) {
+            $check = 1;
+
+            for ($i= $sw[0]; $i < count($sw) + $sw[0]  ; $i++) { 
+
+                $k = count($sw) + $sw[0];
+                for ($j= $i+1; $j < $k; $j++) { 
+                    $degress = array($i,$j);
+                    array_push($resultData, $degress); 
                 }
             }
         }
+        array_push($resultData, end($resultData));
+
+        return [$resultData,$resultVertices];
     }
 
-    public function __destruct() {
-        reset($this->adjacencyMatrix);
-        reset($this->coloredVertices);
-        reset($this->colorsVector);        
-        $this->matrixSize = 0;
-        $this->chromaticNo = 0;
+    protected function graphColoring($arrDegrees,$vertices){
+        $check = 0;
+        $color = array_fill(0, $vertices+1, 0);
+        $temp = 0;
+        $resultData = array();
+        for ($i= 1; $i <= $vertices ; $i++) { 
+            if(!$color[$i]){
+                $temp++;
+                $color[$i] = $temp;
+                for ($j = $i+1; $j <= $vertices ; $j++) { 
+                    if(($arrDegrees[$i][$j] == 0) && ($color[$j] == 0)){
+                        $check = 1;
+                        for($k = $i+1; $k < $j; $k++ ){
+                            if(($arrDegrees[$k][$j] == 1) && ($color[$i] == $color[$k])){
+                                $check = 0;
+                                break;
+                            }
+                        }
+                        if($check == 1){
+                            $color[$j] = $temp;
+                        } 
+                    }
+                }
+            }
+        }
+
+        for ($s = 1; $s <= $temp ; $s++) { 
+            $tempData = [];
+            for ($g = 1; $g <= $vertices ; $g++) { 
+                if($color[$g] == $s){
+                    array_push($tempData,$g);
+                }
+            }
+            array_push($resultData,$tempData);
+        }
+        return $resultData;
     }
+
+    protected function toCourseCode($dataVertices,$dataSort){
+        $resultData = [];
+        for ($i= 0; $i < count($dataSort) ; $i++) { 
+            $tempData = [];
+            foreach ($dataSort[$i] as $o) {
+                $number = $o-1;
+                array_push($tempData, $dataVertices[$number][0]);
+            }
+            array_push($resultData, $tempData);
+        }
+        return $resultData;
+    }
+
+    protected function autoCreateCalender($courses){
+        $day = $this->_AllOfDay();
+        $room = $this->_AllOfRoom();
+        $weeks = $this->_AllOfWeek();
+        $tkb = new tkb();
+        
+        foreach ($weeks as $week) {
+            $checkSession = 1;
+            $numDay = 0;
+            foreach ($courses as $course) {
+                $numRoom = 0;
+                foreach ($course as $sttnhom) {
+                    if($checkSession%2 == 0){
+                        $buoi = "Chiều";
+                    }else{
+                        $buoi = "Sáng";
+                    }
+                    
+                    $tkb->createTKB(
+                        $day[$numDay]->thu,
+                        $buoi,
+                        $week->tuan,
+                        $room[$numRoom]->phong_stt,
+                        $sttnhom);
+                    $numRoom++;
+                }
+                if($checkSession%2 == 0){
+                    $numDay++;
+                }
+                $checkSession++;
+
+            }
+        }
+    }
+
+    public function test(Request $request){
+        $resultData = $this->allPracticeGroup();
+        [$data,$dataVertices] = $this->convertData($resultData);
+        $vertices = count($dataVertices);
+        $arrDegrees = array_fill(0, $vertices+1, array_fill(0, $vertices+1, 0));
+        for($i = 0; $i < count($data); $i++){ 
+            $x = $data[$i][0];
+            $y = $data[$i][1];
+            $arrDegrees[$x][$y] = 1;
+            $arrDegrees[$y][$x] = 1;
+        }
+
+        for($i = 0; $i < count($data); $i++){ 
+            $x = $data[$i][0];
+            $y = $data[$i][1];
+            $arrDegrees[$x][$y] = 1;
+            $arrDegrees[$y][$x] = 1;
+        }
+
+        $resultSort = $this->graphColoring($arrDegrees,$vertices);
+        $resultCourse = $this->toCourseCode($dataVertices,$resultSort);
+        $this->autoCreateCalender($resultCourse);
+    }
+
 
 }

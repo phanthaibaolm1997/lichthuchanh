@@ -58,7 +58,7 @@ class tkb extends Model
 		$create->tuan = $tuan;
 		$create->sttnhom = $nhom;
 		$create->phong_stt = $phong;
-		$create->tt_id = 2;
+		$create->tt_id = 1;
 		$create->save();
 	}
 

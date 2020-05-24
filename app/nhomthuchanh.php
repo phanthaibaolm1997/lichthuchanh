@@ -34,4 +34,29 @@ class nhomthuchanh extends Model
 			->get();
 	}
 
+	public function allPracticeGroup($schoolYear,$semester){
+		$data =  nhomthuchanh::where(
+			[
+				'namhoc'=>$schoolYear,
+				'hocky'=>$semester
+			])
+			->with('hocky')
+			->with('hocphan')
+			->with('namhoc')
+			->with('lophocphan')
+			->get();
+		return $data;
+
+	}
+
+	public function updateThucHanh($cb_id,$hp_id,$namhoc,$hocky,$sttl){
+		$create = new  nhomthuchanh();
+		$create->hp_id = $hp_id;
+		$create->namhoc = $namhoc;
+		$create->hocky = $hocky;
+		$create->sttl = $sttl;
+		$create->save();
+		return $create;
+	}
+
 }

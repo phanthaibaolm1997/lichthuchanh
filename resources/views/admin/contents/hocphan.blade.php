@@ -54,7 +54,9 @@
 																@if($umaru == 1)
 																	<button class="btn btn-custom btn-success" disabled="true">Đã đăng ký</button>
 																@else
-																	<button class="btn btn-custom btn-primary">Đăng ký thực hành</button>
+																	<a href="{{ route('admin.dangkythuchanh',[$lhp->cb_id,$lhp->hp_id,$lhp->namhoc,$lhp->hocky,$lhp->sttl])}}">
+																		<button class="btn btn-custom btn-primary">Đăng ký thực hành</button>
+																	</a>
 																@endif
 																
 																<button class="btn btn-custom btn-primary" data-toggle="modal" data-target="#EditLHP{{ $loop->iteration }}_{{ $lhp->sttl }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>

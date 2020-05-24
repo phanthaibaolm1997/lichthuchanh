@@ -14,6 +14,7 @@ use App\phanmemphong;
 use App\version_software;
 use App\canbo;
 use App\lophocphan;
+use App\nhomthuchanh;
 use DB;
 use Carbon\Carbon;
 use Session;
@@ -340,6 +341,15 @@ class AdminController extends Controller
         }
         return redirect()->back()->with('errors', 'Có lỗi xãy ra!'); 
 
+    }
+
+    public function updateThucHanh($cb_id,$hp_id,$namhoc,$hocky,$sttl){
+        $nhomthuchanh = new nhomthuchanh();
+        $result = $nhomthuchanh->updateThucHanh($cb_id,$hp_id,$namhoc,$hocky,$sttl);
+        if($result){
+            return redirect()->back()->with('success', 'Đăng ký thực hành thành công!'); 
+        }
+        return redirect()->back()->with('errors', 'Có lỗi xãy ra!'); 
     }
 }
 
