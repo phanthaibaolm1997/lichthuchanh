@@ -18,14 +18,19 @@
 		</div>
 	</div>
 	<section>
+		<div class="flash-message" style="width: 50%; margin: auto;" >
+			@if(session('success'))
+			  <p class="alert alert-success" id="boxMes">{{session('success')}}</p>
+			@endif
+		</div>
 		<div class="row">
 			@foreach($allGroup as $group)
 			<div class="col-md-3">
 				<div class="card-title">
-					<strong>Học phần: </strong>{{$group->lophocphan->lhp_ten}}
-					<br/><strong>Mã học phần: </strong>{{$group->lophocphan->hp_id}}
-					<br/><strong>STT: </strong> #{{$group->sttnhom}}
-					<br/><p style="margin-top: 10px; text-align: right;">
+					<p class="text-one-line"><strong>Học phần: </strong>{{$group->lophocphan->lhp_ten}}</p>
+					<p><strong>Mã học phần: </strong>{{$group->lophocphan->hp_id}}</p>
+					<p><strong>STT: </strong> #{{$group->sttnhom}}</p>
+					<p style="margin-top: 10px; text-align: right;">
 						@if($group->is_practice == 1)
 							<span  style="border-radius: 4px;padding: 5px; color: #fff; background: #5cb85c;"><i class="fa fa-check-circle-o" aria-hidden="true"></i> Đã sắp lịch</span>
 						@else
@@ -42,3 +47,10 @@
 	</section>
 </div>
 @endsection
+<script type="text/javascript">
+	setTimeout(function(){
+	  if ($('#boxMes').length > 0) {
+	    $('#boxMes').remove();
+	  }
+	}, 3000)
+</script>

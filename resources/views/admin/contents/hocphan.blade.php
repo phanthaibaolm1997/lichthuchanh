@@ -7,6 +7,11 @@
 	</div>
 	<div class="row">
 		<div class="col-md-8 ">
+			<div class="flash-message" style="width: 50%; margin: auto;" >
+				@if(session('success'))
+				  <p class="alert alert-success" id="boxMes">{{session('success')}}</p>
+				@endif
+			</div>
 			<div class="cardMaster" style="min-height: 700px">
 				<br/>
 				<h4 style="color: #de470f; font-weight: bold; margin-left: 15px;"><i class="fa fa-list" aria-hidden="true"></i> Danh Sách Học Phần </h4>
@@ -210,3 +215,10 @@
 </div>
 
 @endsection
+<script type="text/javascript">
+	setTimeout(function(){
+	  if ($('#boxMes').length > 0) {
+	    $('#boxMes').remove();
+	  }
+	}, 3000)
+</script>

@@ -38,7 +38,7 @@
 							<td style="width: 200px; height: 60px;">
 								<?php $flag = 0; ?>
 								@foreach($getLichThucHanh as $lth)
-								@if($tuan->tuan === $lth->tuan AND $buoi->buoi === $lth->buoi AND $phong->phong_stt === $lth->phong_stt AND $thu->thu === $lth->thu AND Session::has('session_canbo_id') == $lth->nhomthuchanh->lophocphan->cb_id)
+								@if($tuan->tuan === $lth->tuan AND $buoi->buoi === $lth->buoi AND $phong->phong_stt === $lth->phong_stt AND $thu->thu === $lth->thu AND Session::get('session_canbo_id') == $lth->nhomthuchanh->lophocphan->cb_id)
 								{{-- Update flag when has tkb --}}
 								<?php $flag = 1; ?>
 								<div class="registered-color">

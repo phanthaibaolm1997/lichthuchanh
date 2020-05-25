@@ -57,7 +57,7 @@
                             <span class="author-project-icon adminpro-icon adminpro-down-arrow"></span>
                         </a>
                         <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated flipInX">
-                            <li><a href="#"><p class="text-center">Đăng xuất</p></a>
+                            <li><a href="{{route('logout')}}"><p class="text-center">Đăng xuất</p></a>
                             </li>
 
                         </ul>

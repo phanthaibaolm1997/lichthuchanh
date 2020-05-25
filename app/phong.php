@@ -44,10 +44,8 @@ class phong extends Model
 	}
 
 	public function getComputerofRoom(){
-		$room = phong::select(['phong_stt'])
+		$room = phong::select(['phong_stt','phong_slmay'])
 			->get()->toArray();
-		$computer = phong::select(['phong_slmay'])
-			->get()->toArray();
-		return [$room,$computer];
+		return $room;
 	}
 }

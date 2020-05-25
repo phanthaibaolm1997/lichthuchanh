@@ -354,8 +354,10 @@ class AdminController extends Controller
 
     public function delAdminTKB(){
         $tkb = new tkb();
+        $nhomthuchanh = new nhomthuchanh();
         $semester = $this->checkSemester($this->thisMonth);
         $tkb->deleteTKBDemo($this->thisSchoolYear,$semester);
+        $nhomthuchanh->updateStatusDemo($this->thisSchoolYear,$semester);
         return redirect()->back()->with('success', 'Clear Data!');
     }
 }

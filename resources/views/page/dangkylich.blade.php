@@ -8,25 +8,25 @@
 			<div class="row">
 				<div class="col-md-4">
 					<label><i class="fa fa-qrcode" aria-hidden="true"></i> Chọn phần mềm</label>
-					<select class="form-control">
+					<select class="form-control" disabled>
 						<option>Điện toán</option>
 					</select>
 				</div>
 				<div class="col-md-4">
 					<label> <i class="fa fa-desktop" aria-hidden="true"></i> Chọn CPU</label>
-					<select class="form-control">
+					<select class="form-control" disabled>
 						<option>Điện toán</option>
 					</select>
 				</div>
 				<div class="col-md-4">
 					<label><i class="fa fa-microchip" aria-hidden="true"></i> Số lượng máy</label>
-					<select class="form-control">
+					<select class="form-control" disabled>
 						<option>Điện toán</option>
 					</select>
 				</div>
 			</div>
 			<br/>
-			<p class="text-right"><button class="btn btn-default"> Tìm kiếm</button></p>
+			<p class="text-right"><button class="btn btn-default" disabled> Tìm kiếm</button></p>
 		</div>
 	</div>
 	<div class="col-md-12" style="margin-top: 20px;">

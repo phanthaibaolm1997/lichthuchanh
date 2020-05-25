@@ -86,7 +86,9 @@ class IndexController extends Controller
         $cb_id = $this->getSessionCanBo();
         $semester = $this->checkSemester($this->thisMonth);
 
+
         $data['getHocPhanByCB'] = $hocphan->getHocPhanByCB($cb_id,$semester,$this->thisSchoolYear);
+        // dd($data['getHocPhanByCB']);
         $data['getLichThucHanh'] = $tkb->getTKBHK($this->thisSchoolYear,$semester);
         $data['getAllPhong'] = $phong->getAllPhong();
         $data['getAllTuan'] = $tuan->getAllTuan();

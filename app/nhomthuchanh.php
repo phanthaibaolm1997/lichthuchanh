@@ -72,4 +72,12 @@ class nhomthuchanh extends Model
 		->first();
 	}
 
+	public function updateStatusDemo($schoolYear,$semester){
+		$data =  nhomthuchanh::where(
+			[
+				'namhoc'=>$schoolYear,
+				'hocky'=>$semester
+			])->update(['is_practice'=>0]);
+	}
+
 }

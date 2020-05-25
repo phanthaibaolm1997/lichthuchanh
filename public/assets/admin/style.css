@@ -28,6 +28,11 @@
     border: 1px solid #ddd;
     border-bottom-color: transparent;
 }
+.text-one-line{
+	text-overflow: ellipsis; 
+	overflow: hidden; 
+	white-space: nowrap;
+}
 #card-head{
 	background-color: #fff;
     height: 60px;

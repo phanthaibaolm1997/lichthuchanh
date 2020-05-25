@@ -59,26 +59,10 @@ class SapLichController extends Controller
         $group = $nhomthuchanh->getAllNhom();
         return $group;
     }
-    protected function _ScoresOfCalendar(){
-        $week = 1;
-        $arrDegreesrrScore = [];
-
-        // $calendarOfWeek = $this->_CalendarOfWeek($week);
-        $arrDegreesllOfDay = $this->_AllOfDay();
-        $arrDegreesllOfRoom = $this->_AllOfRoom();
-        $arrDegreesllGroup = $this->_AllGroup();
-        foreach ($arrDegreesllGroup as $group) {
-            $number = $group->nth_siso;
-
-        }
-    }
 
     public function autoScheduling(Request $request){
         $data['allGroup'] = $this->allPracticeGroup();
-        // $data['calendarOfWeek'] = $this->_CalendarOfWeek($week);
-        // $data['allOfDay'] = $this->_AllOfDay();
-        // $data['allOfRoom'] = $this->_AllOfRoom();
-        $this->_ScoresOfCalendar();
+
 
         return view('admin.contents.auto_schedule',$data);
     }
@@ -183,28 +167,36 @@ class SapLichController extends Controller
     }
     protected function _updateStatusGroup($courses){
         $nhomthuchanh = new nhomthuchanh();
-        foreach ($course as $sttnhom) {
-            $nhomthuchanh->updateStatus($sttnhom,1);
+        foreach ($courses as $course) {
+            foreach ($course as $sttnhom) {
+               $nhomthuchanh->updateStatus($sttnhom,1);
+            }
         }
     }
     protected function sortRoom($courses){
         $nhomthuchanh = new nhomthuchanh();
         $phong = new phong();
         $arrRoomResult = array();
-        [$room,$computers] = $phong->getComputerofRoom();
+        $room = $phong->getComputerofRoom();
+
+        usort($room, function ($room1, $room2) {
+            return $room1['phong_slmay'] <=> $room2['phong_slmay'];
+        });
+
         foreach ($courses as $course) {
-            $siso = $nhomthuchanh->getSiSo($courses);
-            for ($i=0; $i < count($computers) ; $i++) { 
-                if($computers[$i]->phong_slmay >= $siso){
-                    array_push($arrRoomResult,$room[$i]->phong_stt);
-                    unset($computers[$i]);
+            $dataSiso = $nhomthuchanh->getSiSo($courses);
+            $siso = $dataSiso->nth_siso;
+            for ($i=0; $i < count($room) ; $i++) { 
+                $numComputer = $room[$i]['phong_slmay'];
+                if( $numComputer >= $siso){
+                    array_push($arrRoomResult,$room[$i]['phong_stt']);
                     unset($room[$i]);
                     $room = array_values($room);
-                    $computers = array_values($computers);
                     break;
                 }
             } 
         }
+
         return $arrRoomResult;
     }
 
@@ -229,7 +221,7 @@ class SapLichController extends Controller
                         $day[$numDay]->thu,
                         $buoi,
                         $week->tuan,
-                        $rooms[$numRoom]->phong_stt,
+                        $rooms[$numRoom],
                         $sttnhom);
                     $numRoom++;
                 }
@@ -242,7 +234,6 @@ class SapLichController extends Controller
     }
 
     public function AutoSortCalender(Request $request){
-        dd($this->sortRoom('aaa'));
         $resultData = $this->allPracticeGroup();
         [$data,$dataVertices] = $this->convertData($resultData);
         $vertices = count($dataVertices);
@@ -263,10 +254,12 @@ class SapLichController extends Controller
 
         $resultSort = $this->graphColoring($arrDegrees,$vertices);
         $resultCourse = $this->toCourseCode($dataVertices,$resultSort);
-        $rooms = $this->_updateStatusGroup($resultCourse);
+        $room = $this->sortRoom($resultCourse);
         $this->autoCreateCalender($resultCourse,$room);
+
+        $this->_updateStatusGroup($resultCourse);
         
-        return redirect()->route('route.name');
+        return redirect()->route('auto')->with('success', 'Tạo lịch thành công!');
     }
 
 

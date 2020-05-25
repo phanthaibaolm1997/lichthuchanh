@@ -19,14 +19,18 @@ class hocphan extends Model
 	}
 
 	public function getHocPhanByCB($cb_id,$hk,$nam){
-		$data = hocphan::with(['nhomthuchanh'=> function($q) use($cb_id,$hk,$nam){
+		$data = hocphan::with(['nhomthuchanh'=> function($q) use($hk,$nam){
 				    [
 				    	$q->where('namhoc', $nam),
 				    	$q->where('hocky', $hk),
 				    	
 				    ];
 				}])
-		// ->where('cb_id',$cb_id)
+		->with(['lophocphan'=> function($q) use($cb_id){
+		    [
+		    	$q->where('cb_id', $cb_id)
+		    ];
+		}])
 		->get();
 		return $data;
 	}

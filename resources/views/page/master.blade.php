@@ -19,6 +19,7 @@
         <ul>
           @if(Session::has('session_canbo_id'))
               <li><a href="{{ route('backhome') }}">Trang Quản lý</a></li>
+              <li><small>{{Session::get('session_canbo_email')}}</small></a></li>
           @else
               <li><a href="{{ route('login') }}">Đăng nhập</a></li>
           @endif
