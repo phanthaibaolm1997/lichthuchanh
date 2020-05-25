@@ -42,4 +42,12 @@ class phong extends Model
 		$data = phong::with('phanmemphong')->where('phong_stt',$id)->first();
 		return $data;
 	}
+
+	public function getComputerofRoom(){
+		$room = phong::select(['phong_stt'])
+			->get()->toArray();
+		$computer = phong::select(['phong_slmay'])
+			->get()->toArray();
+		return [$room,$computer];
+	}
 }

@@ -59,4 +59,17 @@ class nhomthuchanh extends Model
 		return $create;
 	}
 
+	public function updateStatus($stt,$status){
+		nhomthuchanh::where('sttnhom',$stt)
+			->update([
+				'is_practice'=>$status
+			]);
+	}
+
+	public function getSiSo($stt){
+		return nhomthuchanh::select('nth_siso')
+		->where('sttnhom',$stt)
+		->first();
+	}
+
 }

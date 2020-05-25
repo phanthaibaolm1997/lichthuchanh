@@ -1,5 +1,5 @@
 
-<div class="container-fluid" >
+<div class="container-fluid" style="position: fixed; top: 0; left: 0; width: 100%; z-index: 999;">
     <div id="card-head">
         <div style="display: flex; ">
             <div style="flex: 1; margin-bottom: 5px; margin-top: 5px;">
@@ -12,19 +12,19 @@
                     </div>
                     <div style="flex: 1">
                         <div class="card">
-                            <a href="{{ route('admin.phong') }}"><i class="fa big-icon fa-home"></i> <span class="mini-dn">Phòng</span>
+                            <a href="{{ route('admin.phong') }}"><i class="fa fa-fort-awesome" aria-hidden="true"></i> <span class="mini-dn">Phòng</span>
                             </a>
                         </div>
                     </div>
                     <div style="flex: 1">
                         <div class="card">
-                            <a href="{{ route('admin.phanmem') }}"><i class="fa fa-android" aria-hidden="true"></i> <span class="mini-dn">Phẩn mềm</span>
+                            <a href="{{ route('admin.phanmem') }}"><i class="fa fa-adn" aria-hidden="true"></i> <span class="mini-dn">Phẩn mềm</span>
                             </a>
                         </div>
                     </div>
                     <div style="flex: 1">
                         <div class="card">
-                            <a href="{{ route('admin.hocphan') }}"><i class="fa fa-bookmark" aria-hidden="true"></i> <span class="mini-dn">Học phần</span>
+                            <a href="{{ route('admin.hocphan') }}"><i class="fa fa-leanpub" aria-hidden="true"></i> <span class="mini-dn">Học phần</span>
                             </a>
                         </div>
                     </div>
@@ -36,7 +36,13 @@
                     </div>
                     <div style="flex: 1">
                         <div class="card">
-                            <a href="{{ route('admin.canbo') }}"><i class="fa fa-user" aria-hidden="true"></i> <span class="mini-dn">Cán bộ</span>
+                            <a href="{{ route('admin.canbo') }}"><i class="fa fa-black-tie" aria-hidden="true"></i> <span class="mini-dn">Cán bộ</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div style="flex: 1">
+                        <div class="card">
+                            <a href="{{ route('auto') }}"><i class="fa fa-empire" aria-hidden="true"></i> <span class="mini-dn">Auto</span>
                             </a>
                         </div>
                     </div>

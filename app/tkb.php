@@ -88,4 +88,8 @@ class tkb extends Model
 			'sttnhom'=>$nhom
 		])->update(['phong_stt'=>$phong]);
 	}
+
+	public function deleteTKBDemo($namhoc,$hocky){
+		tkb::truncate();
+	}
 }

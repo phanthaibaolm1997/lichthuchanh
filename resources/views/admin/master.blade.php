@@ -27,30 +27,10 @@
 
 <body class="materialdesign mini-navbar">
     <div class="wrapper-pro">
-        {{-- <div class="left-sidebar-pro">
-            <nav id="sidebar" class="active">
-                <div class="sidebar-header">
-                    <a href="#"><img src="{{ asset('assets/admin/img/message/1.jpg')}}" alt="" />
-                    </a>
-                    <h3>A D M I N</h3>
-                    <p>Developer</p>
-                    <strong>AD</strong>
-                </div>
-                <div class="left-custom-menu-adp-wrap">
-                    @include('admin.includes.sidebar')
-                </div>
-            </nav>
-        </div> --}}
-        {{-- <div class="content-inner-all"> --}}
-           <!-- HEADAER -->
-           
-            {{-- <div class="google-maps-area mg-b-15"> --}}
-                @include('admin.includes.header')
-                <div class="container-fluid">
-                     @yield('content')
-                </div>
-            {{-- </div> --}}
-        {{-- </div> --}}
+        @include('admin.includes.header')
+        <div class="container-fluid" style="margin-top: 70px !important;">
+             @yield('content')
+        </div>
     </div>
     <script src="{{ asset('assets/admin/js/vendor/jquery-1.11.3.min.js')}}"></script>
     <script src="{{ asset('assets/admin/js/bootstrap.min.js')}}"></script>

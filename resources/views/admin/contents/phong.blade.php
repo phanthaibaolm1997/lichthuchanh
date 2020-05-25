@@ -16,7 +16,7 @@
 				<div style="margin-top: 25px;background-color: #fff; border-radius: 5px;  padding: 10px 0px; box-shadow: -4px -2px 4px 0 #fff, 4px 2px 6px 0 #dfe4ea, inset 0 0 1px 0 #c4c4c4, 3px 3px 5px -3px #c4c4c4;">
 					<div class="row">
 						<div class="col-md-5 text-center">
-							<i class="fa fa-home" aria-hidden="true" style="font-size: 8em; color: #337ab7;"></i>
+							<i class="fa fa-fort-awesome" aria-hidden="true" style="font-size: 7em; color: #000;"></i>
 						</div>
 						<div class="col-md-7" >
 							<div style="margin-top: 1.5em">

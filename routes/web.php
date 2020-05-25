@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Route;
 // Public Router
 Route::get('/home', 'IndexController@goBackHome')->name('backhome');
 Route::get('/', 'IndexController@getIndex')->name('home');
-Route::get('/test', 'SapLichController@test')->name('xxx');
 Route::get('/login-admin', 'LoginController@getLoginAdmin')->name('login');
 Route::post('/login-admin', 'LoginController@postLoginAdmin')->name('admin.login.post');
  Route::get('logout/', 'LoginController@logout')->name('logout');
@@ -22,9 +21,11 @@ Route::group(['prefix'=>'can-bo'],function(){
 //Admin Router
 Route::group(['prefix'=>'admin'],function(){
 	Route::get('/', 'AdminController@getIndex')->name('admin');
-	Route::get('/auto', 'SapLichController@autoScheduling');
+	Route::get('/sortcalender', 'SapLichController@AutoSortCalender')->name('sortcalender');
+	Route::get('/auto', 'SapLichController@autoScheduling')->name('auto');
 	Route::get('/thoi-khoa-bieu', 'AdminController@getTKBAdmin')->name('admin.thoikhoabieu');
 	Route::post('/change-lich', 'AdminController@postChangeLich')->name('admin.changelich');
+	Route::get('/delete-tkb', 'AdminController@delAdminTKB')->name('admin.deltkb');
 	Route::group(['prefix'=>'hoc-phan'],function(){
 		Route::get('/', 'AdminController@getHocPhan')->name('admin.hocphan');
 		Route::post('/add-lhp', 'AdminController@postLHP')->name('admin.post.dangkylophocphan');

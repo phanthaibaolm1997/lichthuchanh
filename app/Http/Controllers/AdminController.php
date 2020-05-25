@@ -351,5 +351,12 @@ class AdminController extends Controller
         }
         return redirect()->back()->with('errors', 'Có lỗi xãy ra!'); 
     }
+
+    public function delAdminTKB(){
+        $tkb = new tkb();
+        $semester = $this->checkSemester($this->thisMonth);
+        $tkb->deleteTKBDemo($this->thisSchoolYear,$semester);
+        return redirect()->back()->with('success', 'Clear Data!');
+    }
 }
 
