@@ -13,6 +13,7 @@ use App\phanmem;
 use App\phanmemphong;
 use App\nhomthuchanh;
 use App\canbo;
+use App\yeucau;
 use Carbon\Carbon;
 
 class SapLichController extends Controller
@@ -74,6 +75,21 @@ class SapLichController extends Controller
         return $calendar;
     }
 
+    public function allRequestCourse($courses){
+        $yeucau = new yeucau();
+        $arrReturn = [];
+        foreach ($courses as $course) {
+            $arrTemp = [];
+            foreach ($course as $key) {
+                $data = $yeucau->allRequestCourse($key);
+                array_push($arrTemp,$data);
+            }
+            array_push($arrReturn,$arrTemp); 
+        }
+        return $arrReturn;
+        
+    }
+
     protected function convertData($data){
         $resultData = [];
         $resultVertices = [];
@@ -85,39 +101,35 @@ class SapLichController extends Controller
             $keyGV = $obj->lophocphan->canbo->cb_id;
             $key = [$obj->sttnhom,$keyGV];
 
-
             array_push($resultVertices, $key);
             if(in_array($keyGV , $arrTemp)){
                 array_push($swag[$keyGV], $index);
             }else{
-                $swag[$keyGV]= array();
+                $swag[$keyGV] = array();
                 array_push($swag[$keyGV], $index);
                 array_push($arrTemp, $keyGV);
             }
-
             $index++;
         }
         
-        foreach ($swag as $sw) {
-            $check = 1;
-
-            for ($i= $sw[0]; $i < count($sw) + $sw[0]  ; $i++) { 
-
-                $k = count($sw) + $sw[0];
+        $check = 1; 
+        foreach ($swag as $key => $sw) {
+            $k = count($sw) + $check;
+            for ($i= $check; $i <$k; $i++) { 
                 for ($j= $i+1; $j < $k; $j++) { 
                     $degress = array($i,$j);
                     array_push($resultData, $degress); 
                 }
+                $check++;
             }
         }
         array_push($resultData, end($resultData));
-
         return [$resultData,$resultVertices];
     }
 
-    protected function graphColoring($arrDegrees,$vertices){
+    protected function graphColoring_AntiDuplicate($arrDegrees,$vertices){
         $check = 0;
-        $color = array_fill(0, $vertices+1, 0);
+        $color = array_fill(0, $vertices +1, 0);
         $temp = 0;
         $resultData = array();
         for ($i= 1; $i <= $vertices ; $i++) { 
@@ -178,23 +190,27 @@ class SapLichController extends Controller
         $phong = new phong();
         $arrRoomResult = array();
         $room = $phong->getComputerofRoom();
-
+    
+        //sắp xếp phòng
         usort($room, function ($room1, $room2) {
             return $room1['phong_slmay'] <=> $room2['phong_slmay'];
         });
 
         foreach ($courses as $course) {
-            $dataSiso = $nhomthuchanh->getSiSo($courses);
-            $siso = $dataSiso->nth_siso;
-            for ($i=0; $i < count($room) ; $i++) { 
-                $numComputer = $room[$i]['phong_slmay'];
-                if( $numComputer >= $siso){
-                    array_push($arrRoomResult,$room[$i]['phong_stt']);
-                    unset($room[$i]);
-                    $room = array_values($room);
-                    break;
-                }
-            } 
+            $rooms = $room;
+            foreach($course as $stt){
+                $dataSiso = $nhomthuchanh->getSiSo($course);
+                $siso = $dataSiso->nth_siso;
+                for ($i=0; $i < count($rooms) ; $i++) { 
+                    $numComputer = $rooms[$i]['phong_slmay'];
+                    if( $numComputer >= $siso){
+                        array_push($arrRoomResult,$rooms[$i]['phong_stt']);
+                        unset($rooms[$i]);
+                        $rooms = array_values($rooms);
+                        break;
+                    }
+                } 
+            }
         }
 
         return $arrRoomResult;
@@ -235,6 +251,7 @@ class SapLichController extends Controller
 
     public function AutoSortCalender(Request $request){
         $resultData = $this->allPracticeGroup();
+        // dd($resultData);
         [$data,$dataVertices] = $this->convertData($resultData);
         $vertices = count($dataVertices);
         $arrDegrees = array_fill(0, $vertices+1, array_fill(0, $vertices+1, 0));
@@ -244,16 +261,12 @@ class SapLichController extends Controller
             $arrDegrees[$x][$y] = 1;
             $arrDegrees[$y][$x] = 1;
         }
-
-        for($i = 0; $i < count($data); $i++){ 
-            $x = $data[$i][0];
-            $y = $data[$i][1];
-            $arrDegrees[$x][$y] = 1;
-            $arrDegrees[$y][$x] = 1;
-        }
-
-        $resultSort = $this->graphColoring($arrDegrees,$vertices);
+        $resultSort = $this->graphColoring_AntiDuplicate($arrDegrees,$vertices);  
         $resultCourse = $this->toCourseCode($dataVertices,$resultSort);
+
+        $request = $this->allRequestCourse($resultCourse);
+        
+        dd($request);
         $room = $this->sortRoom($resultCourse);
         $this->autoCreateCalender($resultCourse,$room);
 
