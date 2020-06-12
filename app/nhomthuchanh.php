@@ -83,4 +83,5 @@ class nhomthuchanh extends Model
 			])->update(['is_practice'=>0]);
 	}
 
+
 }

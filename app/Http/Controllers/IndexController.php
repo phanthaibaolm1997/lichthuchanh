@@ -13,6 +13,7 @@ use App\hocphan;
 use Carbon\Carbon;
 use App\lophocphan;
 use App\phanmem;
+use App\yeucau;
 use Session;
 
 class IndexController extends Controller
@@ -147,6 +148,34 @@ class IndexController extends Controller
         $data['allPM'] = $phanmem->getAllPM();
 
         return view('page.lophocphan',$data);    
+    }
+
+    public function yeuCau(Request $request){
+        $cb_id = $this->getSessionCanBo();
+        $sttnhom = $request->sttnhom;
+        $phanmem = $request->pm_id;
+        $yeucau = new yeucau();
+
+        $yeucau->deleteYC($sttnhom);
+        foreach ($phanmem as $pm) {
+            $yeucau->createYC($sttnhom,$pm);
+        } 
+        return back();
+    }
+
+    public function xacNhan($id, Request $request){
+        $id = $request->id;
+        $tkb = new tkb();
+        $tkb->updateXacNhan($id);
+        return back();
+
+    }
+    public function tuChoi($id, Request $request){
+        $id = $request->id;
+        $tkb = new tkb();
+        $tkb->deleteSTTNhom($id);
+        return back();
+
     }
 
     

@@ -58,7 +58,7 @@ class tkb extends Model
 		$create->tuan = $tuan;
 		$create->sttnhom = $nhom;
 		$create->phong_stt = $phong;
-		$create->tt_id = 1;
+		$create->tt_id = 2;
 		$create->save();
 	}
 
@@ -91,5 +91,15 @@ class tkb extends Model
 
 	public function deleteTKBDemo($namhoc,$hocky){
 		tkb::truncate();
+	}
+
+	public function updateXacNhan($id){
+		tkb::where('sttnhom',$id)->update([
+			'tt_id'=>1
+		]);
+	}
+
+	public function deleteSTTNhom($id){
+		tkb::where('sttnhom',$id)->delete();
 	}
 }

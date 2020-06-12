@@ -15,7 +15,10 @@ Route::group(['prefix'=>'can-bo'],function(){
 	Route::get('/dang-ky-lich', 'IndexController@getDKL')->name('canbo.dangkylich');
 	Route::post('/dang-ky-lich', 'IndexController@postDKL')->name('dangkylich');
 	Route::get('/quan-ly-dang-ky', 'IndexController@getQLDK')->name('canbo.quanlydk');
+	Route::get('/xac-nhan/{id}', 'IndexController@xacNhan')->name('canbo.xacnhan');
+	Route::get('/tu-choi/{id}', 'IndexController@tuChoi')->name('canbo.tuchoi');
 	Route::post('/update-messenger', 'IndexController@postMessenger')->name('canbo.messenger');
+	Route::post('/yeucau', 'IndexController@yeuCau')->name('canbo.yeucau');
 	Route::get('/delete-tkb', 'IndexController@deleteTKB')->name('canbo.tkb.delete');
 	Route::get('/lop-hoc-phan', 'IndexController@getLHP')->name('canbo.lophocphan');
 });

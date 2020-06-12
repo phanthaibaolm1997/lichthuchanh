@@ -76,18 +76,74 @@ class SapLichController extends Controller
     }
 
     public function allRequestCourse($courses){
+        $PMRoom = $this->getPMYCRoom();
         $yeucau = new yeucau();
+        $nhomthuchanh = new nhomthuchanh();
         $arrReturn = [];
         foreach ($courses as $course) {
             $arrTemp = [];
             foreach ($course as $key) {
+                $hihi = [];
                 $data = $yeucau->allRequestCourse($key);
-                array_push($arrTemp,$data);
+                array_push($hihi,[$key,$data]);
+                array_push($arrTemp,$hihi);
             }
+            //trả về mảng [sttnhom, [pm_id]]
             array_push($arrReturn,$arrTemp); 
         }
-        return $arrReturn;
-        
+
+        $dataXYZ = [];
+        foreach($arrReturn as $arr){
+            
+            $rooms = $PMRoom;
+            $arrTemp = [];
+            $soluong = $nhomthuchanh->getSiSo($arr[0][0])->nth_siso;
+            //sắp xếp theo giảm dần số lượng phần mềm yêu cầu
+            usort($arr, function ( $arr2,$arr1) {
+                return count($arr1[0][1]) <=> count($arr2[0][1]);
+            });
+
+            foreach ($arr as $a) {
+                //lấy mảng pm_id
+               $pm_req = $a[0][1];
+               $arrPMAccept = [];
+                foreach ($rooms as $room) {
+                    //so sánh mảng pm_id với phần mềm có trong từng phòng
+                    if(array_intersect($pm_req,$room[1]) && $room[2] >= $soluong){
+                        //nếu khớp với nhau thì sẽ cho stt_phòng đó vào mảng
+                        array_push($arrPMAccept,$room[0]);
+                    }
+                }
+                // sắp xếp theo tăng dần số lượng môn học có phần mềm thích hợp
+               array_push($arrTemp,[$a[0][0],$arrPMAccept]);
+            }
+            usort($arrTemp, function ($arrTemp1,$arrTemp2) {
+                return count($arrTemp1[1]) <=> count($arrTemp2[1]);
+            });
+            array_push($dataXYZ,$arrTemp);
+        }
+        $data = [];
+        foreach ($dataXYZ as $obj) {
+            $arrEx = [];
+            $arrFake = [];
+            foreach($obj as $o){
+                for ($i = 0; $i <= count($o) ; $i++) { 
+                    if(!in_array($o[1][$i],$arrEx)){
+                        array_push($arrEx,$o[1][$i]);
+                        array_push($arrFake,[$o[0],$o[1][$i]]);
+                        break;
+                    }
+                }
+            }
+            array_push($data,$arrFake);
+        }   
+        return $data;
+    }
+
+    public function getPMYCRoom(){
+        $phong = new phong();
+        $data = $phong->getPMYCRoom();
+        return $data;
     }
 
     protected function convertData($data){
@@ -181,52 +237,21 @@ class SapLichController extends Controller
         $nhomthuchanh = new nhomthuchanh();
         foreach ($courses as $course) {
             foreach ($course as $sttnhom) {
-               $nhomthuchanh->updateStatus($sttnhom,1);
+               $nhomthuchanh->updateStatus($sttnhom[0],1);
             }
         }
     }
-    protected function sortRoom($courses){
-        $nhomthuchanh = new nhomthuchanh();
-        $phong = new phong();
-        $arrRoomResult = array();
-        $room = $phong->getComputerofRoom();
-    
-        //sắp xếp phòng
-        usort($room, function ($room1, $room2) {
-            return $room1['phong_slmay'] <=> $room2['phong_slmay'];
-        });
 
-        foreach ($courses as $course) {
-            $rooms = $room;
-            foreach($course as $stt){
-                $dataSiso = $nhomthuchanh->getSiSo($course);
-                $siso = $dataSiso->nth_siso;
-                for ($i=0; $i < count($rooms) ; $i++) { 
-                    $numComputer = $rooms[$i]['phong_slmay'];
-                    if( $numComputer >= $siso){
-                        array_push($arrRoomResult,$rooms[$i]['phong_stt']);
-                        unset($rooms[$i]);
-                        $rooms = array_values($rooms);
-                        break;
-                    }
-                } 
-            }
-        }
-
-        return $arrRoomResult;
-    }
-
-    protected function autoCreateCalender($courses,$rooms){
+    protected function autoCreateCalender($dataInsert){
         $day = $this->_AllOfDay();
         $weeks = $this->_AllOfWeek();
         $tkb = new tkb();
-
         foreach ($weeks as $week) {
             $checkSession = 1;
             $numDay = 0;
-            foreach ($courses as $course) {
+            foreach ($dataInsert as $dataI) {
                 $numRoom = 0;
-                foreach ($course as $sttnhom) {
+                foreach ($dataI as $data) {
                     if($checkSession%2 == 0){
                         $buoi = "Chiều";
                     }else{
@@ -237,8 +262,8 @@ class SapLichController extends Controller
                         $day[$numDay]->thu,
                         $buoi,
                         $week->tuan,
-                        $rooms[$numRoom],
-                        $sttnhom);
+                        $data[1],
+                        $data[0]);
                     $numRoom++;
                 }
                 if($checkSession%2 == 0){
@@ -251,7 +276,6 @@ class SapLichController extends Controller
 
     public function AutoSortCalender(Request $request){
         $resultData = $this->allPracticeGroup();
-        // dd($resultData);
         [$data,$dataVertices] = $this->convertData($resultData);
         $vertices = count($dataVertices);
         $arrDegrees = array_fill(0, $vertices+1, array_fill(0, $vertices+1, 0));
@@ -263,14 +287,10 @@ class SapLichController extends Controller
         }
         $resultSort = $this->graphColoring_AntiDuplicate($arrDegrees,$vertices);  
         $resultCourse = $this->toCourseCode($dataVertices,$resultSort);
+        $dataInsert = $this->allRequestCourse($resultCourse);
+        $this->autoCreateCalender($dataInsert);
 
-        $request = $this->allRequestCourse($resultCourse);
-        
-        dd($request);
-        $room = $this->sortRoom($resultCourse);
-        $this->autoCreateCalender($resultCourse,$room);
-
-        $this->_updateStatusGroup($resultCourse);
+        $this->_updateStatusGroup($dataInsert);
         
         return redirect()->route('auto')->with('success', 'Tạo lịch thành công!');
     }

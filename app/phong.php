@@ -48,4 +48,18 @@ class phong extends Model
 			->get()->toArray();
 		return $room;
 	}
+
+	public function getPMYCRoom(){
+		$data =  phong::with('phanmemphong')->get();
+		$arrTemp = [];
+		foreach ($data as $d) {
+			$arrPM = [];
+			foreach ($d->phanmemphong as $pm ){
+				array_push($arrPM,$pm->pm_id);
+			}
+			$hihi = [$d->phong_stt,$arrPM,$d->phong_slmay];
+			array_push($arrTemp,$hihi);
+		}
+		return $arrTemp;
+	}
 }

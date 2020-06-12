@@ -1,6 +1,10 @@
 @extends('page.master')
 @section('content')
 <div class="tab-content" style="min-height: 600px">
+    <div class="card-title">
+        <h3 class="text-center" style="color: #de470f; font-weight: bold;">HỌC PHẦN HK NÀY</h3>
+    </div>
+    <br />
     <div class="row">
         @foreach($allLHP as $lhp)
         <div class="col-md-6">
@@ -23,8 +27,7 @@
                             role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
-                                    <form method="POST">
-                                        {{-- action="{{route('canbo.yeucau')}}" --}}
+                                    <form method="POST" action="{{route('canbo.yeucau')}}">
                                         <div class="modal-body">
                                             <h4>[Yêu Cầu Phần Mềm] - #{{$lhp->nhomthuchanh[0]->sttnhom}}</h4>
                                             <hr />
@@ -32,7 +35,7 @@
                                             @csrf
                                             <input type="hidden" value="{{$lhp->nhomthuchanh[0]->sttnhom}}"
                                                 name="sttnhom" />
-                                            <select class="form-control js-example-basic-multiple" name="pm[]"
+                                            <select class="form-control js-example-basic-multiple" name="pm_id[]"
                                                 multiple="multiple" style="width: 100%;">
                                                 @foreach ($allPM as $pm)
                                                 <?php $check = false; ?>
