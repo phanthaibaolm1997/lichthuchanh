@@ -11,6 +11,8 @@ use App\buoi;
 use App\tkb;
 use App\hocphan;
 use Carbon\Carbon;
+use App\lophocphan;
+use App\phanmem;
 use Session;
 
 class IndexController extends Controller
@@ -133,6 +135,18 @@ class IndexController extends Controller
 
     public function goBackHome(){
         return view('page.home');
+    }
+
+    public function getLHP(){
+        $cb_id = $this->getSessionCanBo();
+        $semester = $this->checkSemester($this->thisMonth);
+
+        $lophocphan = new lophocphan();
+        $phanmem = new phanmem();
+        $data['allLHP'] = $lophocphan->getAllLHPCB($cb_id,$semester,$this->thisSchoolYear);
+        $data['allPM'] = $phanmem->getAllPM();
+
+        return view('page.lophocphan',$data);    
     }
 
     

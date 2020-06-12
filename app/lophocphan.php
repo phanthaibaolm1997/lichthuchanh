@@ -23,7 +23,7 @@ class lophocphan extends Model
 		 return $this->belongsTo('App\namhoc', 'namhoc');
 	}
 	public function nhomthuchanh(){
-		return $this->hasMany('App\nhomthuchanh', 'sttl');
+		return $this->hasMany('App\nhomthuchanh', 'sttl')->with('yeucau');
 	}
 
 	public function createLHP($cb_id,$ten_lhp,$soluong_lhp,$hp_id,$thisSchoolYear,$semester){
@@ -69,5 +69,13 @@ class lophocphan extends Model
 			return true;
 		}
 		return false;
+	}
+
+	public function getAllLHPCB($cb_id,$hocky,$namhoc){
+		return lophocphan::where([
+			'cb_id' => $cb_id,
+			'namhoc' => $namhoc,
+			'hocky' => $hocky,
+		])->with('hocphan')->with('nhomthuchanh')->get();
 	}
 }

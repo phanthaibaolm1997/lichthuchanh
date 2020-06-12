@@ -18,6 +18,10 @@ class phanmem extends Model
 		 return $this->hasMany('App\version_software', 'pm_id');
 	}
 
+	public function yeucau(){
+		return $this->hasMany('App\yeucau', 'pm_id');
+	}
+
 	public function getAllPM(){
 		return phanmem::with('version_software')->get();
 	}

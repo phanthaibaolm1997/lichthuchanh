@@ -17,6 +17,7 @@ Route::group(['prefix'=>'can-bo'],function(){
 	Route::get('/quan-ly-dang-ky', 'IndexController@getQLDK')->name('canbo.quanlydk');
 	Route::post('/update-messenger', 'IndexController@postMessenger')->name('canbo.messenger');
 	Route::get('/delete-tkb', 'IndexController@deleteTKB')->name('canbo.tkb.delete');
+	Route::get('/lop-hoc-phan', 'IndexController@getLHP')->name('canbo.lophocphan');
 });
 //Admin Router
 Route::group(['prefix'=>'admin'],function(){

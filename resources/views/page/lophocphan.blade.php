@@ -23,7 +23,8 @@
                             role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
-                                    <form method="POST" action="{{route('canbo.yeucau')}}">
+                                    <form method="POST">
+                                        {{-- action="{{route('canbo.yeucau')}}" --}}
                                         <div class="modal-body">
                                             <h4>[Yêu Cầu Phần Mềm] - #{{$lhp->nhomthuchanh[0]->sttnhom}}</h4>
                                             <hr />

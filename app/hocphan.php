@@ -17,6 +17,7 @@ class hocphan extends Model
 	public function nhomthuchanh(){
 		return $this->hasMany('App\nhomthuchanh', 'hp_id');
 	}
+	
 
 	public function getHocPhanByCB($cb_id,$hk,$nam){
 		$data = hocphan::with(['nhomthuchanh'=> function($q) use($hk,$nam){
