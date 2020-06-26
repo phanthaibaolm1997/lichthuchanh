@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="{{ asset('assets/admin/css/c3.min.css')}}">
     <link rel="stylesheet" href="{{ asset('assets/admin/style.css')}}">
     <link rel="stylesheet" href="{{ asset('assets/admin/css/responsive.css')}}">
-    
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
     <script src="{{ asset('assets/admin/js/vendor/modernizr-2.8.3.min.js')}}"></script>
 </head>
 
@@ -29,10 +29,12 @@
     <div class="wrapper-pro">
         @include('admin.includes.header')
         <div class="container-fluid" style="margin-top: 70px !important;">
-             @yield('content')
+            @yield('content')
         </div>
     </div>
+    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> --}}
     <script src="{{ asset('assets/admin/js/vendor/jquery-1.11.3.min.js')}}"></script>
+    <script type="text/javascript" src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js" defer></script>
     <script src="{{ asset('assets/admin/js/bootstrap.min.js')}}"></script>
     <script src="{{ asset('assets/admin/js/jquery.meanmenu.js')}}"></script>
     <script src="{{ asset('assets/admin/js/jquery.mCustomScrollbar.concat.min.js')}}"></script>
@@ -42,7 +44,9 @@
     <script src="{{ asset('assets/admin/js/counterup/waypoints.min.js')}}"></script>
     <script src="{{ asset('assets/admin/js/google.maps/google.maps-active.js')}}"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBiNUO68DkrsFKFz744_LWMqCNI_GqYciQ&callback=initMap" type="text/javascript"></script>
+    
     <script src="{{ asset('assets/admin/js/main.js')}}"></script>
+    @yield('javascript')
 </body>
 
 </html>

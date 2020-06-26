@@ -10,7 +10,7 @@
 				</div>
 			</div>
 			<br/>
-			<table class="table table-bordered">
+			<table class="table table-bordered" id="bang1">
 				<thead>
 					<tr>
 						<th>Số thứ tự</th>
@@ -98,7 +98,7 @@
 				<h3  style="color: #de470f; font-weight: bold">Phiên bản</h3>
 			</div>
 			<br/>
-			<table class="table table-bordered">
+			<table class="table table-bordered" id="bang2">
 				<thead>
 					<tr>
 						<th>Số thứ tự</th>
@@ -156,6 +156,12 @@
 		</div>
 	</div>
 </div>
-
-
+@endsection
+@section('javascript')
+<script type="text/javascript">
+	$(document).ready( function () {
+	    $('#bang1').DataTable();
+	    $('#bang2').DataTable();
+	});
+</script>
 @endsection

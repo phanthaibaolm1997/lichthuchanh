@@ -43,6 +43,13 @@ class phong extends Model
 		return $data;
 	}
 
+	public function filterPhong($pm,$sl){
+		$data = phong::where('phong_slmay','>=',$sl)->with(["phanmemphong" => function($q)use($pm){
+		    $q->where('phanmemphong.pm_id', '=', $pm);
+		}])->get();
+    	return $data;
+	}
+
 	public function getComputerofRoom(){
 		$room = phong::select(['phong_stt','phong_slmay'])
 			->get()->toArray();

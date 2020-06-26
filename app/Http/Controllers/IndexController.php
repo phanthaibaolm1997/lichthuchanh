@@ -15,6 +15,7 @@ use App\lophocphan;
 use App\phanmem;
 use App\yeucau;
 use Session;
+use Response; 
 
 class IndexController extends Controller
 {
@@ -55,7 +56,7 @@ class IndexController extends Controller
     	$data['getAllThu'] = $thu->getAllThu();
     	$data['getAllBuoi'] = $buoi->getAllBuoi();
     	$data['getLichThucHanh'] = $tkb->getTKBHK($this->thisSchoolYear,$semester);
-        // dd($data);
+
     	return view('page.index',$data);
     }
     public function getDKL(Request $request){
@@ -65,10 +66,12 @@ class IndexController extends Controller
         $buoi = new buoi();
         $tkb = new tkb();
         $hocphan = new hocphan();
+        $phanmem = new phanmem();
 
         $cb_id = $this->getSessionCanBo();
         $semester = $this->checkSemester($this->thisMonth);
 
+        $data['getAllPM'] = $phanmem->getAllPM();
         $data['getHocPhanByCB'] = $hocphan->getHocPhanByCB($cb_id,$semester,$this->thisSchoolYear);
         $data['getLichThucHanh'] = $tkb->getTKBHK($this->thisSchoolYear,$semester);
         $data['getAllPhong'] = $phong->getAllPhong();
@@ -176,6 +179,14 @@ class IndexController extends Controller
         $tkb->deleteSTTNhom($id);
         return back();
 
+    }
+    public function ajaxFilter(Request $request){
+        $slmay = $request->soluong;
+        $phanmem = $request->phanmem;
+        $phong = new phong();
+
+        $dataFilter = $phong->filterPhong($phanmem,$slmay);
+        return Response::json($dataFilter);
     }
 
     

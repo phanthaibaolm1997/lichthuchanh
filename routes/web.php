@@ -8,7 +8,8 @@ Route::get('/home', 'IndexController@goBackHome')->name('backhome');
 Route::get('/', 'IndexController@getIndex')->name('home');
 Route::get('/login-admin', 'LoginController@getLoginAdmin')->name('login');
 Route::post('/login-admin', 'LoginController@postLoginAdmin')->name('admin.login.post');
- Route::get('logout/', 'LoginController@logout')->name('logout');
+Route::get('logout/', 'LoginController@logout')->name('logout');
+Route::get('timkiemajax/', 'IndexController@ajaxFilter')->name('ajax.timkiem');
 
 //Cán bộ Router
 Route::group(['prefix'=>'can-bo'],function(){
@@ -48,6 +49,10 @@ Route::group(['prefix'=>'admin'],function(){
 		Route::post('/edit', 'AdminController@postPhanMemEdit')->name('admin.phanmem.edit');
 		Route::get('/delete/{pm_id}', 'AdminController@delPhanMem')->name('admin.phanmem.delete');
 		Route::get('/delete-version/{pm_id}/{ver_ma}', 'AdminController@delPhanMemVersion')->name('admin.phanmemversion.delete');
+	});
+
+	Route::group(['prefix'=>'thong-ke'],function(){
+		Route::get('/', 'AdminController@getPhanMem')->name('admin.thongke');
 	});
 
 	Route::group(['prefix'=>'phong'],function(){

@@ -3,30 +3,28 @@
 
 <div class="row">
 	<div class="col-md-12">
-		<div class="filter_lth">
+		<div class="filter_lth container">
 			<h4 class="text-center">Nâng cao</h4>
 			<div class="row">
-				<div class="col-md-4">
+				<div class="col-md-8">
 					<label><i class="fa fa-qrcode" aria-hidden="true"></i> Chọn phần mềm</label>
-					<select class="form-control" disabled>
-						<option>Điện toán</option>
+					<select class="form-control" id="phanmemselect">
+						@foreach($getAllPM as $pm)
+						<option value="{{ $pm->pm_id }}">{{ $pm->pm_ten }}</option>
+						@endforeach
 					</select>
 				</div>
 				<div class="col-md-4">
-					<label> <i class="fa fa-desktop" aria-hidden="true"></i> Chọn CPU</label>
-					<select class="form-control" disabled>
-						<option>Điện toán</option>
-					</select>
-				</div>
-				<div class="col-md-4">
-					<label><i class="fa fa-microchip" aria-hidden="true"></i> Số lượng máy</label>
-					<select class="form-control" disabled>
-						<option>Điện toán</option>
+					<label> <i class="fa fa-desktop" aria-hidden="true"></i> Sô lượng máy</label>
+					<select class="form-control" id="slmay">
+						<option value="40">40 Máy</option>
+						<option value="60">60 Máy</option>
+						<option value="80">80 Máy</option>
 					</select>
 				</div>
 			</div>
 			<br/>
-			<p class="text-right"><button class="btn btn-default" disabled> Tìm kiếm</button></p>
+			<p class="text-right"><button type="button" class="btn btn-default" id="ajaxtim"> Tìm kiếm</button></p>
 		</div>
 	</div>
 	<div class="col-md-12" style="margin-top: 20px;">
@@ -61,7 +59,7 @@
 							@endif
 							<th style="vertical-align: middle; text-align: center; color: #de470f;">{{ $phong->phong_ten }}</th>
 							@foreach($getAllThu as $thu)
-							<td style="width: 200px; height: 60px;">
+							<td style="width: 200px; height: 60px;" class="phong phong_{{ $phong->phong_stt }}">
 								<?php $flag = 0; ?>
 								@foreach($getLichThucHanh as $lth)
 								@if($tuan->tuan === $lth->tuan AND $buoi->buoi === $lth->buoi AND $phong->phong_stt === $lth->phong_stt AND $thu->thu === $lth->thu  )
@@ -172,7 +170,6 @@
 	}
 	$('#formHocPhan').on('change', function() {
 		let json_data = JSON.parse($(this).find(':selected').attr('data-lhp'));
-		console.log(json_data);
 		let code = "";
 		code += '<select id="formNhom" name="formNhom" class="form-control">';
 		json_data.forEach(data => {
@@ -181,4 +178,34 @@
 		code += '</select>';
 		$('#contentGroup').html(code);
 	});
+
+	$('body').on('click', '#ajaxtim', function(event) {
+		let phanmem = $('#phanmemselect').val();
+		let soluong = $('#slmay').val();
+		$(".phong").css("background-color", "unset");
+		$.ajax({
+		    type: 'GET', //THIS NEEDS TO BE GET
+		    url: '{{ route('ajax.timkiem') }}',
+		    contentType: 'application/json',
+    		dataType: 'json',
+		    data: {
+				phanmem: phanmem,
+				soluong: soluong
+			},
+		    success: function (data) {
+		    	alert('Tìm kiếm thành công!');
+				for(var item in data) {
+					console.log(data[item]);
+					$(".phong_"+data[item].phong_stt).css("background-color", "#a0ffa0");
+				}
+		    },
+		    error: function() { 
+		         alert('Không tìm thấy');
+		    }
+		})
+	});
+		
+		
+		
+
 </script>

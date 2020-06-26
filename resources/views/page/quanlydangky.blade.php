@@ -12,9 +12,7 @@
 			<li @if($loop->iteration == 1) class="active" @endif><a data-toggle="tab" href="#tuan_{{$tuan->tuan}}">Tuần
 					{{$tuan->tuan}}</a></li>
 			@endforeach
-
 		</ul>
-
 		<div class="tab-content">
 			@foreach($getAllTuan as $tuan)
 			<div id="tuan_{{$tuan->tuan}}" class="tab-pane fade in @if($loop->iteration == 1) active @endif">

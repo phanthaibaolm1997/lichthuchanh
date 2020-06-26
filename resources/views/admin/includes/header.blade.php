@@ -12,6 +12,12 @@
                     </div>
                     <div style="flex: 1">
                         <div class="card">
+                            <a href="{{ route('admin.thongke') }}"><i class="fa fa-calendar-o" aria-hidden="true"></i> <span class="mini-dn">Thống kê</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div style="flex: 1">
+                        <div class="card">
                             <a href="{{ route('admin.phong') }}"><i class="fa fa-fort-awesome" aria-hidden="true"></i> <span class="mini-dn">Phòng</span>
                             </a>
                         </div>
