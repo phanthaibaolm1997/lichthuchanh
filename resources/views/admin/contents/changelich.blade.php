@@ -1,5 +1,6 @@
 @extends('admin.master')
 @section('content')
+<?php $date = 1; ?>
 <div class="container-fluid" style="background: #fff; margin-top: 10px; min-height: 100vh; padding-top: 30px">
 	<div class="row">
 		<div class="col-md-12">
@@ -26,6 +27,21 @@
 					@endif
 				@endforeach
 				<div id="tuan_{{$tuan->tuan}}" class="tab-pane fade in @if($loop->iteration == 1) active @endif">
+					<h4 class="text-center" id="date_{{ $date }}"></h4>
+					<script type="text/javascript">
+
+						var curr = new Date;
+						var first = curr.getDate() - curr.getDay() + 6*{{$date}}; 
+						var last = first + 6; 
+						console.log(1);
+						var firstday = new Date(curr.setDate(first)).toLocaleDateString('en-US');
+						var lastday = new Date(curr.setDate(last)).toLocaleDateString('en-US');
+						var block = document.getElementById("date_{{ $date }}");
+						block.innerHTML = firstday+" - "+lastday;
+
+
+					</script>
+					<?php $date++;  ?>
 					<table class="table table-bordered text-center table_lth" align="center">
 						<tbody>
 							<tr style="height: 50px; background: #de470f; color: #fff;">

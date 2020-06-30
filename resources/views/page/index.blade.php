@@ -16,7 +16,9 @@
 		<?php $date = 1; ?>
 		<div class="tab-content">
 			@foreach($getAllTuan as $tuan)
-			<h4 class="text-center" id="date_{{ $date }}"></h4>
+			
+			<div id="tuan_{{$tuan->tuan}}" class="tab-pane fade in @if($loop->iteration == 1) active @endif">
+				<h4 class="text-center" id="date_{{ $date }}"></h4>
 			<script type="text/javascript">
 
 				var curr = new Date;
@@ -31,7 +33,6 @@
 
 			</script>
 			<?php $date++;  ?>
-			<div id="tuan_{{$tuan->tuan}}" class="tab-pane fade in @if($loop->iteration == 1) active @endif">
 				<table class="table table-bordered text-center table_lth" align="center" style="background-color: #fff;">
 					<tbody>
 						<tr style="height: 50px; background: #de470f; color: #fff;">
