@@ -39,7 +39,7 @@ Route::group(['prefix'=>'admin'],function(){
 		Route::post('/add-hp', 'AdminController@postHP')->name('admin.post.hocphan');
 		Route::post('/edit-hp', 'AdminController@editHP')->name('admin.edit.hocphan');
 		Route::get('/delete-hp/{id}', 'AdminController@deleteHP')->name('admin.delete.hocphan');
-		Route::get('/dangkythuchanh/{cb_id}/{hp_id}/{namhoc}/{hocky}/{sttl}', 'AdminController@updateThucHanh')->name('admin.dangkythuchanh');
+		Route::get('/dangkythuchanh/{cb_id}/{hp_id}/{namhoc}/{hocky}/{sttl}/{soluong}', 'AdminController@updateThucHanh')->name('admin.dangkythuchanh');
 	});
 	
 	Route::group(['prefix'=>'phan-mem'],function(){

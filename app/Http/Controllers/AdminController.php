@@ -267,6 +267,7 @@ class AdminController extends Controller
         $cb_id = $request->cb_id;
         $ten_lhp = $request->ten_lhp;
         $soluong_lhp = $request->soluong_lhp;
+  
         $hp_id = $request->hp_id;
         $semester = $this->checkSemester($this->thisMonth);
 
@@ -344,9 +345,9 @@ class AdminController extends Controller
 
     }
 
-    public function updateThucHanh($cb_id,$hp_id,$namhoc,$hocky,$sttl){
+    public function updateThucHanh($cb_id,$hp_id,$namhoc,$hocky,$sttl,$soluong){
         $nhomthuchanh = new nhomthuchanh();
-        $result = $nhomthuchanh->updateThucHanh($cb_id,$hp_id,$namhoc,$hocky,$sttl);
+        $result = $nhomthuchanh->updateThucHanh($cb_id,$hp_id,$namhoc,$hocky,$sttl,$soluong);
         if($result){
             return redirect()->back()->with('success', 'Đăng ký thực hành thành công!'); 
         }

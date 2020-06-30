@@ -59,7 +59,7 @@
 																@if($umaru == 1)
 																	<button class="btn btn-custom btn-success" disabled="true">Đã đăng ký</button>
 																@else
-																	<a href="{{ route('admin.dangkythuchanh',[$lhp->cb_id,$lhp->hp_id,$lhp->namhoc,$lhp->hocky,$lhp->sttl])}}">
+																	<a href="{{ route('admin.dangkythuchanh',[$lhp->cb_id,$lhp->hp_id,$lhp->namhoc,$lhp->hocky,$lhp->sttl,$lhp->lhp_soluongdk])}}">
 																		<button class="btn btn-custom btn-primary">Đăng ký thực hành</button>
 																	</a>
 																@endif

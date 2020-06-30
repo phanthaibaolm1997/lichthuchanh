@@ -52,12 +52,13 @@ class nhomthuchanh extends Model
 
 	}
 
-	public function updateThucHanh($cb_id,$hp_id,$namhoc,$hocky,$sttl){
+	public function updateThucHanh($cb_id,$hp_id,$namhoc,$hocky,$sttl,$soluong){
 		$create = new  nhomthuchanh();
 		$create->hp_id = $hp_id;
 		$create->namhoc = $namhoc;
 		$create->hocky = $hocky;
 		$create->sttl = $sttl;
+		$create->nth_siso = $soluong;
 		$create->save();
 		return $create;
 	}
