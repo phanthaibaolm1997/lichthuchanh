@@ -13,8 +13,24 @@
 			<li @if($loop->iteration == 1) class="active" @endif><a data-toggle="tab" href="#tuan_{{$tuan->tuan}}">Tuần {{$tuan->tuan}}</a></li>
 			@endforeach
 		</ul>
+		<?php $date = 1; ?>
 		<div class="tab-content">
 			@foreach($getAllTuan as $tuan)
+			<h4 class="text-center" id="date_{{ $date }}"></h4>
+			<script type="text/javascript">
+
+				var curr = new Date;
+				var first = curr.getDate() - curr.getDay() + 6*{{$date}}; 
+				var last = first + 6; 
+				console.log(1);
+				var firstday = new Date(curr.setDate(first)).toLocaleDateString('en-US');
+				var lastday = new Date(curr.setDate(last)).toLocaleDateString('en-US');
+				var block = document.getElementById("date_{{ $date }}");
+				block.innerHTML = firstday+" - "+lastday;
+
+
+			</script>
+			<?php $date++;  ?>
 			<div id="tuan_{{$tuan->tuan}}" class="tab-pane fade in @if($loop->iteration == 1) active @endif">
 				<table class="table table-bordered text-center table_lth" align="center" style="background-color: #fff;">
 					<tbody>
@@ -38,10 +54,10 @@
 								@if($tuan->tuan === $lth->tuan AND $buoi->buoi === $lth->buoi AND $phong->phong_stt === $lth->phong_stt AND $thu->thu === $lth->thu  )
 								<div class="registered">
 									<strong>Nhóm {{$lth->sttnhom}}</strong>
-									 <p style="margin: 0px;">{{$lth->nhomthuchanh->hp_id}}: {{$lth->nhomthuchanh->hocphan->hp_ten}}</p>
-									 <p style="margin: 0px;">GV: {{$lth->nhomthuchanh->lophocphan->canbo->cb_ten}}</p>
+									<p style="margin: 0px;">{{$lth->nhomthuchanh->hp_id}}: {{$lth->nhomthuchanh->hocphan->hp_ten}}</p>
+									<p style="margin: 0px;">GV: {{$lth->nhomthuchanh->lophocphan->canbo->cb_ten}}</p>
 									<div style="background: #fff; color: #f5c5a3; padding: 5px; margin-top: 5px;">
-									<i class="fa fa-envelope-o" style="cursor: pointer;" aria-hidden="true" data-toggle="modal" data-target="#myModal" onClick="Notify(`<?php echo $lth->tkb_ghichu;?>`)"></i>
+										<i class="fa fa-envelope-o" style="cursor: pointer;" aria-hidden="true" data-toggle="modal" data-target="#myModal" onClick="Notify(`<?php echo $lth->tkb_ghichu;?>`)"></i>
 									</div>
 								</div>
 								@endif
@@ -75,10 +91,10 @@
 				
 				<textarea id="notify" rows="10" cols="80"></textarea>
 				<script>
-			      $(document).ready(function () {
-			         CKEDITOR.replace('notify', {readOnly:true});
-			      });
-			</script>
+					$(document).ready(function () {
+						CKEDITOR.replace('notify', {readOnly:true});
+					});
+				</script>
 			</div>
 		</div>
 	</div>

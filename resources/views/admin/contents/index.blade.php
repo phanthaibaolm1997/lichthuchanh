@@ -6,6 +6,7 @@
 			<div class="card-title">
 				<h3 class="text-center" style="color: #de470f; font-weight: bold;">LỊCH THỰC HÀNH</h3>
 			</div>
+			<?php $date = 1; ?>
 			<ul class="nav nav-tabs">
 				@foreach($getAllTuan as $tuan)
 				<li @if($loop->iteration == 1) class="active" style="color: #000 !important"  @endif ><a data-toggle="tab" href="#tuan_{{$tuan->tuan}}" style="background-color: #de470f; color: #fff;">Tuần {{$tuan->tuan}}</a></li>
@@ -13,20 +14,36 @@
 			</ul>
 			<div class="tab-content">
 				@foreach($getAllTuan as $tuan)
+
 				<?php 
-					$register = 0;
-					$wait =0;
+				$register = 0;
+				$wait =0;
 				?>
 				@foreach($getLichThucHanh as $lth)
-					@if($lth->tuan == $tuan->tuan)
-						@if($lth->tt_id == 0)
-							<?php $register = $register + 1; ?>
-						@else
-							<?php $wait = $wait + 1; ?>
-						@endif
-					@endif
+				@if($lth->tuan == $tuan->tuan)
+				@if($lth->tt_id == 0)
+				<?php $register = $register + 1; ?>
+				@else
+				<?php $wait = $wait + 1; ?>
+				@endif
+				@endif
 				@endforeach
 				<div id="tuan_{{$tuan->tuan}}" class="tab-pane fade in @if($loop->iteration == 1) active @endif">
+					<h4 class="text-center" id="date_{{ $date }}"></h4>
+					<script type="text/javascript">
+
+						var curr = new Date;
+						var first = curr.getDate() - curr.getDay() + 6*{{$date}}; 
+						var last = first + 6; 
+						console.log(1);
+						var firstday = new Date(curr.setDate(first)).toLocaleDateString('en-US');
+						var lastday = new Date(curr.setDate(last)).toLocaleDateString('en-US');
+						var block = document.getElementById("date_{{ $date }}");
+						block.innerHTML = firstday+" - "+lastday;
+
+
+					</script>
+					<?php $date++;  ?>
 					<table class="table table-bordered text-center table_lth" align="center">
 						<tbody>
 							<tr style="height: 50px; background: #de470f; color: #fff;">

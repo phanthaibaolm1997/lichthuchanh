@@ -1,6 +1,6 @@
 @extends('page.master')
 @section('content')
-
+<?php $date = 1; ?>
 <div class="row">
 	<div class="col-md-12">
 		<div class="filter_lth container">
@@ -39,10 +39,24 @@
 			<li @if($loop->iteration == 1) class="active" @endif><a data-toggle="tab" href="#tuan_{{$tuan->tuan}}">Tuần {{$tuan->tuan}}</a></li>
 			@endforeach
 		</ul>
-
 		<div class="tab-content">
 			@foreach($getAllTuan as $tuan)
 			<div id="tuan_{{$tuan->tuan}}" class="tab-pane fade in @if($loop->iteration == 1) active @endif">
+				<h4 class="text-center" id="date_{{ $date }}"></h4>
+				<script type="text/javascript">
+					
+						var curr = new Date;
+						var first = curr.getDate() - curr.getDay() + 6*{{$date}}; 
+						var last = first + 6; 
+						console.log(1);
+						var firstday = new Date(curr.setDate(first)).toLocaleDateString('en-US');
+						var lastday = new Date(curr.setDate(last)).toLocaleDateString('en-US');
+						var block = document.getElementById("date_{{ $date }}");
+						block.innerHTML = firstday+" - "+lastday;
+					
+
+				</script>
+				<?php $date++;  ?>
 				<table class="table table-bordered text-center table_lth">
 					<tbody>
 						<tr style="height: 50px; background: #de470f; color: #fff;">
@@ -96,7 +110,7 @@
 			@endforeach
 		</div>
 	</div>
-	
+
 </div>
 @endsection
 
@@ -188,25 +202,25 @@
 		    type: 'GET', //THIS NEEDS TO BE GET
 		    url: '{{ route('ajax.timkiem') }}',
 		    contentType: 'application/json',
-    		dataType: 'json',
+		    dataType: 'json',
 		    data: {
-				phanmem: phanmem,
-				soluong: soluong
-			},
+		    	phanmem: phanmem,
+		    	soluong: soluong
+		    },
 		    success: function (data) {
 		    	alert('Tìm kiếm thành công!');
-				for(var item in data) {
-					console.log(data[item]);
-					$(".phong_"+data[item].phong_stt).css("background-color", "#a0ffa0");
-				}
+		    	for(var item in data) {
+		    		console.log(data[item]);
+		    		$(".phong_"+data[item].phong_stt).css("background-color", "#a0ffa0");
+		    	}
 		    },
 		    error: function() { 
-		         alert('Không tìm thấy');
+		    	alert('Không tìm thấy');
 		    }
 		})
 	});
-		
-		
-		
+
+
+
 
 </script>
