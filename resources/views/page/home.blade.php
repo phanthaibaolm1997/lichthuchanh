@@ -55,6 +55,16 @@
 								</a>
 							</div>
 							<div class="col-md-6">
+								<a href="{{ route('canbo.lophocphan') }}">
+									<div class="card-title" style="height: 250px; position: : relative;">
+										<div class="alignVertical">
+											<i class="fa fa-gg-circle" style="font-size: 2.5em" aria-hidden="true"></i>
+											<h4 class="text-center">Học phần giảng dạy</h4>
+										</div>
+									</div>
+								</a>
+							</div>
+							<div class="col-md-6">
 								<a href="{{ route('logout') }}">
 									<div class="card-title" style="height: 250px; position: : relative;">
 										<div class="alignVertical">
