@@ -16,7 +16,7 @@ class buoi extends Model
 	}
 
 	public function getAllBuoi(){
-		return buoi::all();
+		return buoi::orderBy('buoi', 'desc')->get();
 	}
 
 

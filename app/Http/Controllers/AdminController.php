@@ -15,6 +15,7 @@ use App\version_software;
 use App\canbo;
 use App\lophocphan;
 use App\nhomthuchanh;
+use App\yeucau;
 use DB;
 use Carbon\Carbon;
 use Session;
@@ -359,6 +360,14 @@ class AdminController extends Controller
         $tkb->deleteTKBDemo($this->thisSchoolYear,$semester);
         $nhomthuchanh->updateStatusDemo($this->thisSchoolYear,$semester);
         return redirect()->back()->with('success', 'Clear Data!');
+    }
+
+    public function thongKe(Request $request){
+        $phong = new phong();
+        $phanmem = new phanmem();
+        $data['pmPhong'] = $phong->thongkeSLPMPhong();
+        $data['pmYeuCau'] = $phanmem->thongkePMYC();
+        return view('admin.contents.thongke',$data);  
     }
 }
 

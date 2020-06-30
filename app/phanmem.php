@@ -43,4 +43,9 @@ class phanmem extends Model
 		phanmem::where('pm_id',$id)
 			->delete();
 	}
+
+	public function thongkePMYC(){
+        $data = phanmem::with('yeucau')->get();
+        return $data;
+    }
 }

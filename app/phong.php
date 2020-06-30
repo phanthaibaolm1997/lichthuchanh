@@ -44,10 +44,23 @@ class phong extends Model
 	}
 
 	public function filterPhong($pm,$sl){
-		$data = phong::where('phong_slmay','>=',$sl)->with(["phanmemphong" => function($q)use($pm){
-		    $q->where('phanmemphong.pm_id', '=', $pm);
-		}])->get();
-    	return $data;
+		$data = phong::where('phong_slmay','>=',$sl)->with('phanmemphong')->get();
+		$dataF = [];
+		foreach ($data as $o) {
+			$check = false;
+			if(count($o->phanmemphong) > 0){
+				$arr = $o->phanmemphong;
+				foreach ($arr as $a) {
+					if ($a->pm_id == $pm) {
+						$check = true;
+					}
+				}
+			}
+			if($check){
+				array_push($dataF, $o);
+			}
+		}
+    	return $dataF;
 	}
 
 	public function getComputerofRoom(){
@@ -68,5 +81,11 @@ class phong extends Model
 			array_push($arrTemp,$hihi);
 		}
 		return $arrTemp;
+	}
+
+	public function thongkeSLPMPhong(){
+		$data = phong::with('phanmemphong')->get();
+		
+		return $data;
 	}
 }

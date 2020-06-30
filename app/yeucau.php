@@ -30,4 +30,6 @@ class yeucau extends Model
     public function allRequestCourse($key){
         return yeucau::where('sttnhom',$key)->pluck('pm_id')->toArray();
     }
+
+    
 }

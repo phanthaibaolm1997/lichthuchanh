@@ -32,7 +32,6 @@
             @yield('content')
         </div>
     </div>
-    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> --}}
     <script src="{{ asset('assets/admin/js/vendor/jquery-1.11.3.min.js')}}"></script>
     <script type="text/javascript" src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js" defer></script>
     <script src="{{ asset('assets/admin/js/bootstrap.min.js')}}"></script>
@@ -44,7 +43,7 @@
     <script src="{{ asset('assets/admin/js/counterup/waypoints.min.js')}}"></script>
     <script src="{{ asset('assets/admin/js/google.maps/google.maps-active.js')}}"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBiNUO68DkrsFKFz744_LWMqCNI_GqYciQ&callback=initMap" type="text/javascript"></script>
-    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script src="{{ asset('assets/admin/js/main.js')}}"></script>
     @yield('javascript')
 </body>

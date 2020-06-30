@@ -17,6 +17,7 @@
 				<div class="col-md-4">
 					<label> <i class="fa fa-desktop" aria-hidden="true"></i> Sô lượng máy</label>
 					<select class="form-control" id="slmay">
+						<option value="-1">Chọn tất cả</option>
 						<option value="40">40 Máy</option>
 						<option value="60">60 Máy</option>
 						<option value="80">80 Máy</option>

@@ -180,6 +180,7 @@ class IndexController extends Controller
         return back();
 
     }
+
     public function ajaxFilter(Request $request){
         $slmay = $request->soluong;
         $phanmem = $request->phanmem;
@@ -188,6 +189,8 @@ class IndexController extends Controller
         $dataFilter = $phong->filterPhong($phanmem,$slmay);
         return Response::json($dataFilter);
     }
+
+    
 
     
 }

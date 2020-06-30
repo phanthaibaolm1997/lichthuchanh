@@ -52,7 +52,7 @@ Route::group(['prefix'=>'admin'],function(){
 	});
 
 	Route::group(['prefix'=>'thong-ke'],function(){
-		Route::get('/', 'AdminController@getPhanMem')->name('admin.thongke');
+		Route::get('/', 'AdminController@thongKe')->name('admin.thongke');
 	});
 
 	Route::group(['prefix'=>'phong'],function(){
