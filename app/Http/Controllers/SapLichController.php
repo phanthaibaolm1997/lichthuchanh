@@ -78,6 +78,7 @@ class SapLichController extends Controller
     public function allRequestCourse($courses){
         $PMRoom = $this->getPMYCRoom();
         $yeucau = new yeucau();
+        $phanmem = new phanmem();
         $nhomthuchanh = new nhomthuchanh();
         $arrReturn = [];
         foreach ($courses as $course) {
@@ -85,13 +86,15 @@ class SapLichController extends Controller
             foreach ($course as $key) {
                 $hihi = [];
                 $data = $yeucau->allRequestCourse($key);
+                if(count($data) == 0){
+                    $data = $phanmem->allPMAuto();
+                }
                 array_push($hihi,[$key,$data]);
                 array_push($arrTemp,$hihi);
             }
             //trả về mảng [sttnhom, [pm_id]]
             array_push($arrReturn,$arrTemp); 
         }
-
         $dataXYZ = [];
         foreach($arrReturn as $arr){
             
@@ -123,11 +126,14 @@ class SapLichController extends Controller
             array_push($dataXYZ,$arrTemp);
         }
         $data = [];
+        // dd($dataXYZ);
         foreach ($dataXYZ as $obj) {
             $arrEx = [];
             $arrFake = [];
+            // print_r($obj); echo "<br/>";
             foreach($obj as $o){
-                for ($i = 0; $i <= count($o) ; $i++) { 
+                for ($i = 0; $i < count($o[1]) ; $i++) { 
+                    print_r($o[1]); echo "<br/>";
                     if(!in_array($o[1][$i],$arrEx)){
                         array_push($arrEx,$o[1][$i]);
                         array_push($arrFake,[$o[0],$o[1][$i]]);
@@ -135,6 +141,7 @@ class SapLichController extends Controller
                     }
                 }
             }
+            
             array_push($data,$arrFake);
         }   
         return $data;

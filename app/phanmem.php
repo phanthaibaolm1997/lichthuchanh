@@ -48,4 +48,8 @@ class phanmem extends Model
         $data = phanmem::with('yeucau')->get();
         return $data;
     }
+
+    public function allPMAuto(){
+        return phanmem::pluck('pm_id')->toArray();
+    }
 }
